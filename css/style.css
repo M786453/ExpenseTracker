@@ -72,8 +72,6 @@ section{
 
 article{
     text-align: center;
-
-    
 }
 
 .expense-summary{
@@ -93,10 +91,37 @@ article{
     background-color: var(--bg-dark);
     color: var(--clr-heading-dark-bg);
 
-    /* border: 1px solid var(--clr-body); */
-
     box-shadow: 4px 4px 6px 1px rgba(0,0,0,0.2);
 
+}
+
+/** Expenses Over Time **/
+
+.expenses-period{
+    display: flex;
+
+    justify-content: right;
+
+    gap: 0.5rem;
+
+    list-style: none;
+}
+
+.expenses-period li{
+
+    width: 4rem;
+    font-weight: bold;
+
+    background-color: var(--bg-dark);
+    color: var(--clr-heading-dark-bg);
+
+    padding: 0.5rem;
+}
+
+.expenses-period-chart{
+    border: 1px solid var(--clr-body);
+
+    height: 15rem;
 }
 
 /** Effects **/
@@ -104,4 +129,10 @@ article{
 nav a:hover{
     background-color: var(--clr-body);
     color: var(--clr-headings-dark-bg);
+}
+
+.expenses-period li:hover{
+    cursor: pointer;
+
+    background-color: var(--clr-body);
 }
