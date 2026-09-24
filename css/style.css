@@ -30,6 +30,8 @@ main{
 /** Sidebar **/
 
 aside{
+
+    width: 20%;
     padding: 1rem;
     background-color: var(--bg-dark);
     color: var(--clr-heading-dark-bg);
@@ -61,7 +63,7 @@ nav a.active{
 /** Expense Summary **/
 
 section{
-    width: 100%;
+    width: 80%;
 
     padding: 1rem;
 
