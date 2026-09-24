@@ -1,0 +1,62 @@
+/** General **/
+
+:root{
+    --bg-dark: #0F172A;
+    --bg-light: #F8FAFC;
+
+    --clr-headings-light-bg: #0F172A;
+    --clr-heading-dark-bg: #F8FAFC;
+    --clr-body: #334155;
+    --clr-muted: #94A3B8;
+
+    --clr-income: #059669;
+    --clr-expense: #DC2626;
+}
+
+/** Layout **/
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-light);
+    font-family: 'Inter', sans-serif;
+}
+
+main{
+    display: flex;
+    gap: 2rem;
+}
+
+/** Sidebar **/
+
+aside{
+    padding: 1rem;
+    background-color: var(--bg-dark);
+    color: var(--clr-heading-dark-bg);
+}
+
+nav{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+nav a{
+    text-decoration: none;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--clr-heading-dark-bg);
+    padding: 1rem;
+    border: 1px solid var(--clr-body);
+}
+
+nav a.active{
+    background-color: var(--clr-body);
+    color: var(--clr-headings-dark-bg);
+}
+
+nav a:hover{
+    background-color: var(--clr-body);
+    color: var(--clr-headings-dark-bg);
+}
