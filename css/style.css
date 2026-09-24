@@ -88,12 +88,13 @@ article{
 }
 
 .expense-summary{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
 
     justify-content: center;
     align-items: center;
 
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .summary-card{
@@ -106,6 +107,18 @@ article{
 
     box-shadow: 4px 4px 6px 1px rgba(0,0,0,0.2);
 
+}
+
+@media (max-width: 900px){
+    .expense-summary{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px){
+    .expense-summary{
+        grid-template-columns: 1fr;
+    }
 }
 
 /** Expenses Over Time **/
