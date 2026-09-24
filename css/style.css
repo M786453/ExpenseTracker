@@ -10,7 +10,7 @@
     --bg-dark: #0F172A;
     --bg-light: #F8FAFC;
 
-    --clr-headings-light-bg: #0F172A;
+    --clr-heading-light-bg: #0F172A;
     --clr-heading-dark-bg: #F8FAFC;
     --clr-body: #334155;
     --clr-muted: #94A3B8;
@@ -60,7 +60,7 @@ nav a{
 
 nav a.active{
     background-color: var(--clr-body);
-    color: var(--clr-headings-dark-bg);
+    color: var(--clr-heading-dark-bg);
 }
 
 /** Main **/
@@ -188,7 +188,7 @@ article{
 
 nav a:hover{
     background-color: var(--clr-body);
-    color: var(--clr-headings-dark-bg);
+    color: var(--clr-heading-dark-bg);
 }
 
 .summary-card:hover{
