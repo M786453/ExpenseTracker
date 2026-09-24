@@ -130,19 +130,6 @@ article{
     height: 15rem;
 }
 
-/** Effects **/
-
-nav a:hover{
-    background-color: var(--clr-body);
-    color: var(--clr-headings-dark-bg);
-}
-
-.expenses-period li:hover{
-    cursor: pointer;
-
-    background-color: var(--clr-body);
-}
-
 /** Other Charts **/
 
 .other-charts{
@@ -161,4 +148,52 @@ nav a:hover{
     border: 1px solid var(--clr-body);
 
     padding: 2rem;
+}
+
+/* Recent Expenses */
+
+.recent-expenses{
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.expense{
+    display: flex;
+
+    background-color: var(--bg-dark);
+    color: var(--clr-heading-dark-bg);
+}
+
+.expense div{
+    width: 5rem;
+    padding: 0.8rem;
+
+    border: 1px solid var(--bg-light);
+
+    border-left: none;
+    border-top: none;
+    /* border-right: none; */
+}
+
+/** Effects **/
+
+nav a:hover{
+    background-color: var(--clr-body);
+    color: var(--clr-headings-dark-bg);
+}
+
+.expenses-period li:hover{
+    cursor: pointer;
+
+    background-color: var(--clr-body);
+}
+
+.expense:hover{
+    background-color: var(--clr-body);
+
+    cursor: pointer;
 }
