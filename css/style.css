@@ -1,3 +1,9 @@
+/* Global */
+
+*{
+    box-sizing: border-box;
+}
+
 /** General **/
 
 :root{
@@ -20,7 +26,6 @@ body{
     padding: 0;
     background-color: var(--bg-light);
     font-family: 'Inter', sans-serif;
-    box-sizing: border-box;
 }
 
 main{
