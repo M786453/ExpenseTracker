@@ -133,13 +133,15 @@ article{
     list-style: none;
 }
 
-.expenses-period li{
+.expenses-period button{
 
     width: 5rem;
     font-weight: bold;
 
     background-color: var(--bg-dark);
     color: var(--clr-heading-dark-bg);
+
+    border: none;
 
     padding: 0.5rem;
 }
@@ -211,7 +213,7 @@ nav a:hover{
     cursor: pointer;
 }
 
-.expenses-period li:hover{
+.expenses-period button:hover{
     cursor: pointer;
 
     background-color: var(--clr-body);
