@@ -20,11 +20,11 @@ body{
     padding: 0;
     background-color: var(--bg-light);
     font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
 }
 
 main{
     display: flex;
-    gap: 2rem;
 }
 
 /** Sidebar **/
@@ -55,6 +55,49 @@ nav a.active{
     background-color: var(--clr-body);
     color: var(--clr-headings-dark-bg);
 }
+
+/** Main **/
+
+/** Expense Summary **/
+
+section{
+    width: 100%;
+
+    padding: 1rem;
+
+    color: var(--clr-body);
+}
+
+article{
+    text-align: center;
+
+    
+}
+
+.expense-summary{
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 2rem;
+}
+
+.summary-card{
+
+    width: 15rem;
+    padding: 1rem;
+
+    background-color: var(--bg-dark);
+    color: var(--clr-heading-dark-bg);
+
+    /* border: 1px solid var(--clr-body); */
+
+    box-shadow: 4px 4px 6px 1px rgba(0,0,0,0.2);
+
+}
+
+/** Effects **/
 
 nav a:hover{
     background-color: var(--clr-body);
