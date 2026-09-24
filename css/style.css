@@ -186,6 +186,11 @@ nav a:hover{
     color: var(--clr-headings-dark-bg);
 }
 
+.summary-card:hover{
+    background-color: var(--clr-body);
+    cursor: pointer;
+}
+
 .expenses-period li:hover{
     cursor: pointer;
 
