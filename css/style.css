@@ -162,10 +162,10 @@ article{
     gap: 2rem;
 }
 
-.category-breakdown, .other-analytics{
+.analytics-card{
 
-    width: 15rem;
-    height: 5rem;
+    flex: 1;
+    min-height: 20rem;
 
     border: 1px solid var(--clr-body);
 
