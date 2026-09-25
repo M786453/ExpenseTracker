@@ -85,6 +85,22 @@ section{
     color: var(--color-text);
 }
 
+/* Buttons */
+
+button{
+
+    background-color: var(--color-sidebar);
+    color: var(--color-surface);
+
+    font-size: 0.9rem;
+    font-weight: bold;
+
+    height: 3rem;
+
+    border: none;
+
+}
+
 /* Header */
 
 header{
@@ -95,17 +111,7 @@ header{
 
 header button{
     margin-left: auto;
-
-    background-color: var(--color-sidebar);
-    color: var(--color-surface);
-
-    font-size: 0.9rem;
-    font-weight: bold;
-
     width: 4rem;
-    height: 3rem;
-
-    border: none;
 }
 
 /* Search */
@@ -117,6 +123,12 @@ header button{
 
     background-color: var(--color-sidebar);
     color: var(--color-surface);
+}
+
+/* Search Filters */
+
+.search-filters button{
+    width: 10rem;
 }
 
 /* Expenses */
@@ -142,7 +154,7 @@ header button{
     background-color: var(--color-text);
 }
 
-header button:hover{
+button:hover{
     background-color: var(--color-text);
 
     cursor: pointer;
