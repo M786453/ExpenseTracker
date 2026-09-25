@@ -108,6 +108,17 @@ header button{
     border: none;
 }
 
+/* Search */
+
+#search{
+    padding: 1rem;
+
+    font-size: large;
+
+    background-color: var(--color-sidebar);
+    color: var(--color-surface);
+}
+
 /* Expenses */
 
 .recent-expenses table{
