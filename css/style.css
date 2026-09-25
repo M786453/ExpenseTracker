@@ -190,8 +190,8 @@ article{
     color: var(--clr-heading-dark-bg);
 }
 
-.expense div{
-    width: 5rem;
+.expense td, .expense th{
+    width: 10rem;
     padding: 0.8rem;
 
     border: 1px solid var(--bg-light);
