@@ -42,6 +42,8 @@ aside{
     padding: 1rem;
     background-color: var(--color-sidebar);
     color: var(--color-surface);
+
+    text-align: center;
 }
 
 nav{

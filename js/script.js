@@ -4,14 +4,14 @@ const expenses = [
         "title": "Grocery",
         "category": "Food",
         "amount": 2500,
-        "date": "2026-09-25"
+        "date": "2026-09-26"
     },
     {
         "id": crypto.randomUUID(),
         "title": "Fuel",
         "category": "Travel",
         "amount": 500,
-        "date": "2026-09-25"
+        "date": "2026-09-26"
     },
     {
         "id": crypto.randomUUID(),
