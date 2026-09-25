@@ -53,6 +53,8 @@ setTodayExpenses();
 setExpenseCount();
 setWeekExpenses();
 
+renderRecentExpenses();
+
 function setWeekExpenses(){
 
     const curr_date = new Date();
@@ -111,4 +113,39 @@ function formateDate(current_date){
         return `${current_date.getFullYear()}-${month}-${day}`
     }
     return null;
+}
+
+function renderRecentExpenses(){
+
+    const expenses_table_body = document.querySelector("table tbody");
+
+    console.log("Expenses Table Body:", expenses_table_body);
+
+    for(const exp of expenses){
+
+        const expense_row = document.createElement("tr");
+
+        expense_row.classList.add("expense");
+
+        const title = document.createElement("td");
+        title.innerText = exp.title;
+
+        const category = document.createElement("td");
+        category.innerText = exp.category;
+
+        const amount = document.createElement("td");
+        amount.innerText = `PKR ${exp.amount.toLocaleString()}`;
+
+        const date = document.createElement("td");
+        date.innerText = exp.date;
+
+        expense_row.appendChild(title);
+        expense_row.appendChild(category);
+        expense_row.appendChild(amount);
+        expense_row.appendChild(date);
+
+        expenses_table_body.appendChild(expense_row);
+    }
+
+    
 }
