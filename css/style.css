@@ -76,8 +76,6 @@ section{
 
     flex: 1;
 
-    width: 80%;
-
     padding: 1rem;
 
     gap: 2rem;
@@ -92,16 +90,10 @@ article{
 .expense-summary{
     display: grid;
     grid-template-columns: repeat(4,1fr);
-
-    justify-content: center;
-    align-items: center;
-
     gap: 1rem;
 }
 
 .summary-card{
-
-    width: 15rem;
     padding: 1rem;
 
     background-color: var(--color-sidebar);
@@ -148,6 +140,10 @@ article{
     padding: 0.5rem;
 }
 
+.expenses-period button.active{
+    background-color: var(--color-text);
+}
+
 .expenses-period-chart{
     border: 1px solid var(--color-sidebar);
 
@@ -176,31 +172,19 @@ article{
 
 /* Recent Expenses */
 
-.recent-expenses{
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
+.recent-expenses table{
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .expense{
-    display: flex;
-
     background-color: var(--color-sidebar);
     color: var(--color-surface);
 }
 
 .expense td, .expense th{
-    width: 10rem;
     padding: 0.8rem;
-
-    border: 1px solid var(--color-surface);
-
-    border-left: none;
-    border-top: none;
-    /* border-right: none; */
+    border-bottom: 1px solid var(--color-border);
 }
 
 /** Effects **/
@@ -212,7 +196,6 @@ nav a:hover{
 
 .summary-card:hover{
     background-color: var(--color-text);
-    cursor: pointer;
 }
 
 .expenses-period button:hover{
@@ -223,6 +206,4 @@ nav a:hover{
 
 .expense:hover{
     background-color: var(--color-text);
-
-    cursor: pointer;
 }
