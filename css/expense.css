@@ -84,3 +84,27 @@ section{
 
     color: var(--color-text);
 }
+
+
+/* Expenses */
+
+.recent-expenses table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.expense{
+    background-color: var(--color-sidebar);
+    color: var(--color-surface);
+}
+
+.expense td, .expense th{
+    padding: 0.8rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* Effects */
+
+.expense:hover{
+    background-color: var(--color-text);
+}
