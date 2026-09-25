@@ -85,6 +85,28 @@ section{
     color: var(--color-text);
 }
 
+/* Header */
+
+header{
+    display: flex;
+
+    align-items: center;
+}
+
+header button{
+    margin-left: auto;
+
+    background-color: var(--color-sidebar);
+    color: var(--color-surface);
+
+    font-size: 0.9rem;
+    font-weight: bold;
+
+    width: 4rem;
+    height: 3rem;
+
+    border: none;
+}
 
 /* Expenses */
 
@@ -107,4 +129,10 @@ section{
 
 .expense:hover{
     background-color: var(--color-text);
+}
+
+header button:hover{
+    background-color: var(--color-text);
+
+    cursor: pointer;
 }
