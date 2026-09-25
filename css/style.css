@@ -7,16 +7,18 @@
 /** General **/
 
 :root{
-    --bg-dark: #0F172A;
-    --bg-light: #F8FAFC;
+    --color-bg: #F8FAFC;
+    --color-surface: #FFFFFF;
+    --color-sidebar: #0F172A;
 
-    --clr-heading-light-bg: #0F172A;
-    --clr-heading-dark-bg: #F8FAFC;
-    --clr-body: #334155;
-    --clr-muted: #94A3B8;
+    --color-heading: #0F172A;
+    --color-text: #334155;
+    --color-muted: #94A3B8;
 
-    --clr-income: #059669;
-    --clr-expense: #DC2626;
+    --color-income: #059669;
+    --color-expense: #DC2626;
+
+    --color-border: #CBD5E1;
 }
 
 /** Layout **/
@@ -24,7 +26,7 @@
 body{
     margin: 0;
     padding: 0;
-    background-color: var(--bg-light);
+    background-color: var(--color-bg);
     font-family: 'Inter', sans-serif;
 }
 
@@ -38,8 +40,8 @@ aside{
 
     width: 20rem;
     padding: 1rem;
-    background-color: var(--bg-dark);
-    color: var(--clr-heading-dark-bg);
+    background-color: var(--color-sidebar);
+    color: var(--color-surface);
 }
 
 nav{
@@ -53,14 +55,14 @@ nav a{
     text-align: center;
     font-size: 1.5rem;
     font-weight: bold;
-    color: var(--clr-heading-dark-bg);
+    color: var(--color-surface);
     padding: 1rem;
-    border: 1px solid var(--clr-body);
+    border: 1px solid var(--color-text);
 }
 
 nav a.active{
-    background-color: var(--clr-body);
-    color: var(--clr-heading-dark-bg);
+    background-color: var(--color-text);
+    color: var(--color-surface);
 }
 
 /** Main **/
@@ -80,7 +82,7 @@ section{
 
     gap: 2rem;
 
-    color: var(--clr-body);
+    color: var(--color-text);
 }
 
 article{
@@ -102,8 +104,8 @@ article{
     width: 15rem;
     padding: 1rem;
 
-    background-color: var(--bg-dark);
-    color: var(--clr-heading-dark-bg);
+    background-color: var(--color-sidebar);
+    color: var(--color-surface);
 
     box-shadow: 4px 4px 6px 1px rgba(0,0,0,0.2);
 
@@ -138,8 +140,8 @@ article{
     width: 5rem;
     font-weight: bold;
 
-    background-color: var(--bg-dark);
-    color: var(--clr-heading-dark-bg);
+    background-color: var(--color-sidebar);
+    color: var(--color-surface);
 
     border: none;
 
@@ -147,7 +149,7 @@ article{
 }
 
 .expenses-period-chart{
-    border: 1px solid var(--clr-body);
+    border: 1px solid var(--color-sidebar);
 
     height: 15rem;
 }
@@ -167,7 +169,7 @@ article{
     flex: 1;
     min-height: 20rem;
 
-    border: 1px solid var(--clr-body);
+    border: 1px solid var(--color-text);
 
     padding: 2rem;
 }
@@ -186,15 +188,15 @@ article{
 .expense{
     display: flex;
 
-    background-color: var(--bg-dark);
-    color: var(--clr-heading-dark-bg);
+    background-color: var(--color-sidebar);
+    color: var(--color-surface);
 }
 
 .expense td, .expense th{
     width: 10rem;
     padding: 0.8rem;
 
-    border: 1px solid var(--bg-light);
+    border: 1px solid var(--color-surface);
 
     border-left: none;
     border-top: none;
@@ -204,23 +206,23 @@ article{
 /** Effects **/
 
 nav a:hover{
-    background-color: var(--clr-body);
-    color: var(--clr-heading-dark-bg);
+    background-color: var(--color-text);
+    color: var(--color-surface);
 }
 
 .summary-card:hover{
-    background-color: var(--clr-body);
+    background-color: var(--color-text);
     cursor: pointer;
 }
 
 .expenses-period button:hover{
     cursor: pointer;
 
-    background-color: var(--clr-body);
+    background-color: var(--color-text);
 }
 
 .expense:hover{
-    background-color: var(--clr-body);
+    background-color: var(--color-text);
 
     cursor: pointer;
 }
