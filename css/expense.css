@@ -150,6 +150,48 @@ table{
     border-bottom: 1px solid var(--color-border);
 }
 
+/* Add Expense Popup */
+
+dialog{
+    width: 20rem;
+
+    text-align: center;
+}
+
+.dialog-content{
+    display: flex;
+    flex-direction: column;
+
+    gap: 1rem;
+}
+
+.dialog-content input{
+    padding: 1rem;
+}
+
+.dialog-content select{
+    padding: 1rem;
+}
+
+.dialog-content textarea{
+
+    padding: 1rem;
+    height: 10rem;
+}
+
+.popup-actions{
+    
+    display: flex;
+
+    gap: 1rem;
+
+    justify-content: center;
+}
+
+.popup-actions button{
+    width: 4rem;
+}
+
 /* Footer */
 
 footer{
