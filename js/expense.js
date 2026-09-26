@@ -20,20 +20,81 @@ btn_add_expense_dlg.onclick = () => {
 
     const curr_date = formateDate(new Date());
 
-    all_expenses.push({
+    const expense = {
         "id": crypto.randomUUID(),
         "title": expense_title.value,
         "category": expense_category.value,
         "amount": expense_amount.value,
         "notes": expense_notes.value,
         "date": curr_date
-    })
+    }; 
+
+    all_expenses.push(expense);
+
+    addExpense(expense);
+
+    expense_title.value = "";
+    expense_category.value = "";
+    expense_amount.value = "";
+    expense_notes.value = "";
 
     console.log("Expense:", all_expenses[all_expenses.length-1]);
 
     add_expense_popup.close();
 
 };
+
+function addExpense(expense){
+
+    const table = document.querySelector("table tbody");
+
+    const expense_row = document.createElement("tr");
+
+    expense_row.classList.add("expense");
+
+    const expense_title = document.createElement("td");
+    expense_title.innerText = expense.title;
+
+    const expense_category = document.createElement("td");
+    expense_category.innerText = expense.category;
+
+    const expense_amount = document.createElement("td");
+    expense_amount.innerText = parseInt(expense.amount).toLocaleString();
+
+    const expense_date = document.createElement("td");
+    expense_date.innerText = expense.date;
+
+    const expense_actions = document.createElement("td");
+
+    const expense_actions_div = document.createElement("div");
+    expense_actions_div.classList.add("expense-actions");
+
+    const expense_view_btn = document.createElement("i");
+    expense_view_btn.classList.add("fa-regular");
+    expense_view_btn.classList.add("fa-eye");
+
+    const expense_edit_btn = document.createElement("i");
+    expense_edit_btn.classList.add("fa-solid");
+    expense_edit_btn.classList.add("fa-pencil");
+
+    const expense_delete_btn = document.createElement("i");
+    expense_delete_btn.classList.add("fa-solid");
+    expense_delete_btn.classList.add("fa-trash");
+
+    expense_actions_div.appendChild(expense_view_btn);
+    expense_actions_div.appendChild(expense_edit_btn);
+    expense_actions_div.appendChild(expense_delete_btn);
+
+    expense_actions.appendChild(expense_actions_div);
+
+    expense_row.appendChild(expense_title);
+    expense_row.appendChild(expense_category);
+    expense_row.appendChild(expense_amount);
+    expense_row.appendChild(expense_date);
+    expense_row.appendChild(expense_actions);
+
+    table.appendChild(expense_row);
+}
 
 function formateDate(current_date){
     if(current_date){
