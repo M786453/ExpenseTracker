@@ -162,7 +162,9 @@ table{
 
 dialog{
     width: 20rem;
+}
 
+.dialog-content{
     text-align: center;
 }
 
@@ -198,6 +200,16 @@ dialog{
 
 .popup-actions button{
     width: 4rem;
+}
+
+/* View expense popup */
+
+#view-expense-dailog{
+    text-align: center;
+}
+
+.expense-dailog{
+    text-align: left;
 }
 
 /* Footer */
