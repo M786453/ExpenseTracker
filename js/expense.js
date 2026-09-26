@@ -1,6 +1,6 @@
 const all_expenses = [];
 
-setupAddExpenseDailog();
+setupAddExpenseDialog();
 
 function addExpense(expense){
 
@@ -65,7 +65,7 @@ function addExpense(expense){
 
 function viewExpense(expense){
 
-    const view_expense_dailog = document.getElementById("view-expense-dailog");
+    const view_expense_dialog = document.getElementById("view-expense-dialog");
 
     const view_expense_title = document.getElementById("view-expense-title");
     view_expense_title.innerText = expense.title;
@@ -82,19 +82,19 @@ function viewExpense(expense){
     const view_expense_date = document.getElementById("view-expense-date");
     view_expense_date.innerText = expense.date;
 
-    const close_view_expense_dailog = document.getElementById("close-view-expense-dailog");
+    const close_view_expense_dialog = document.getElementById("close-view-expense-dialog");
 
-    close_view_expense_dailog.onclick = () => {
+    close_view_expense_dialog.onclick = () => {
 
-        view_expense_dailog.close();
+        view_expense_dialog.close();
 
     }
 
-    view_expense_dailog.showModal();
+    view_expense_dialog.showModal();
 
 }
 
-function setupAddExpenseDailog(){
+function setupAddExpenseDialog(){
 
     const btnAddExpense = document.getElementById("addExpense");
 
