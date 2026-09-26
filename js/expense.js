@@ -20,7 +20,7 @@ function addExpense(expense){
     expense_amount.innerText = parseInt(expense.amount).toLocaleString();
 
     const expense_date = document.createElement("td");
-    expense_date.innerText = expense.date;
+    expense_date.innerText = expense.date_created;
 
     const expense_actions = document.createElement("td");
 
@@ -39,6 +39,49 @@ function addExpense(expense){
     const expense_edit_btn = document.createElement("i");
     expense_edit_btn.classList.add("fa-solid");
     expense_edit_btn.classList.add("fa-pencil");
+
+    expense_edit_btn.onclick = () => {
+        
+        const update_expense_dialog = document.getElementById("update-expense-dialog");
+
+        const update_expense_title = document.getElementById("update-expense-title-dlg");
+        update_expense_title.value = expense.title;
+
+        const update_expense_category = document.getElementById("update-expense-category-dlg");
+        update_expense_category.value = expense.category;
+
+        const update_expense_amount = document.getElementById("update-expense-amount-dlg");
+        update_expense_amount.value = expense.amount;
+
+        const update_expense_notes = document.getElementById("update-expense-notes-dlg");
+        update_expense_notes.value = expense.notes;
+
+        const btn_update_expense_dlg = document.getElementById("btn-update-expense-dlg");
+
+        const btn_close_expense_dlg = document.getElementById("btn-close-update-expense-dlg");
+
+        btn_update_expense_dlg.onclick = () => {
+            expense_title.innerText = update_expense_title.value;
+            expense_category.innerText = update_expense_category.value;
+            expense_amount.innerText = update_expense_amount.value;
+
+            expense.title = update_expense_title.value;
+            expense.category = update_expense_category.value;
+            expense.amount = update_expense_amount.value;
+            expense.notes = update_expense_notes.value;
+            expense.date_modified = formateDate(new Date());
+
+            update_expense_dialog.close();
+        }
+
+        btn_close_expense_dlg.onclick = () => {
+            console.log("closing update dialog...");
+            update_expense_dialog.close();
+        }
+
+        update_expense_dialog.showModal();
+
+    }
 
     const expense_delete_btn = document.createElement("i");
     expense_delete_btn.classList.add("fa-solid");
@@ -79,8 +122,11 @@ function viewExpense(expense){
     const view_expense_notes = document.getElementById("view-expense-notes");
     view_expense_notes.innerText = expense.notes;
 
-    const view_expense_date = document.getElementById("view-expense-date");
-    view_expense_date.innerText = expense.date;
+    const view_expense_date_created = document.getElementById("view-expense-date-created");
+    view_expense_date_created.innerText = expense.date_created;
+
+    const view_expense_date_modified = document.getElementById("view-expense-date-modified");
+    view_expense_date_modified.innerText = expense.date_modified;
 
     const close_view_expense_dialog = document.getElementById("close-view-expense-dialog");
 
@@ -93,6 +139,7 @@ function viewExpense(expense){
     view_expense_dialog.showModal();
 
 }
+
 
 function setupAddExpenseDialog(){
 
@@ -122,7 +169,8 @@ function setupAddExpenseDialog(){
             "category": expense_category.value,
             "amount": expense_amount.value,
             "notes": expense_notes.value,
-            "date": curr_date
+            "date_created": curr_date,
+            "date_modified": curr_date
         }; 
 
         all_expenses.push(expense);
