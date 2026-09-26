@@ -57,51 +57,74 @@ renderRecentExpenses();
 
 function setWeekExpenses(){
 
-    const curr_date = new Date();
-    curr_date.setHours(0,0,0,0);
+    try{
 
-    const day = curr_date.getDay();
+        const curr_date = new Date();
+        curr_date.setHours(0,0,0,0);
 
-    const diff = curr_date.getDate() - day + (day === 0 ? -6 : 1);
+        const day = curr_date.getDay();
 
-    const startWeekDate = new Date(curr_date.setDate(diff));
+        const diff = curr_date.getDate() - day + (day === 0 ? -6 : 1);
 
-    const endWeekDate = new Date(curr_date.setDate(diff+6));
+        const startWeekDate = new Date(curr_date.setDate(diff));
 
-    const weekExpenses = expenses.reduce((sum, exp) => {
-        const exp_date = new Date(exp.date);
+        const endWeekDate = new Date(curr_date.setDate(diff+6));
 
-        if(exp_date >= startWeekDate && exp_date <= endWeekDate){
-            sum += exp.amount
-        }
+        const weekExpenses = expenses.reduce((sum, exp) => {
+            const exp_date = new Date(exp.date);
 
-        return sum;
-    },0);
+            if(exp_date >= startWeekDate && exp_date <= endWeekDate){
+                sum += exp.amount
+            }
 
-    el_week_expenses.innerText = `PKR ${weekExpenses.toLocaleString()}`;
+            return sum;
+        },0);
+
+        el_week_expenses.innerText = `PKR ${weekExpenses.toLocaleString()}`;
+
+    }catch(e){
+        console.log("Error in setting week expenses:", e);
+    }
+
+    
 }
 
 
 function setExpenseCount(){
-    el_expense_count.innerText = expenses.length;
+    try{
+        el_expense_count.innerText = expenses.length;
+    }catch(e){
+        console.log("Error in setting expense count:", e);
+    }
 }
 
 function setTotalExpneses(){
-    const total_expenses = expenses.reduce((sum, exp) => {return sum+exp.amount} ,0)
 
-    el_total_expenses.innerText = `PKR ${total_expenses.toLocaleString()}`;
+    try{
+        const total_expenses = expenses.reduce((sum, exp) => {return sum+exp.amount} ,0)
+
+        el_total_expenses.innerText = `PKR ${total_expenses.toLocaleString()}`;
+    }catch(e){
+        console.log("Error in setting total expenses:", e);
+    }
 }
 
 function setTodayExpenses(){
 
-    const curr_date = new Date();
+    try{
 
-    const formatted_curr_date = formateDate(curr_date);
+        const curr_date = new Date();
 
-    const curr_expenses = expenses.filter((exp) => exp.date === formatted_curr_date).
-                            reduce((sum, exp) => {return sum+exp.amount}, 0);
+        const formatted_curr_date = formateDate(curr_date);
 
-    el_today_expenses.innerText = `PKR ${curr_expenses.toLocaleString()}`;
+        const curr_expenses = expenses.filter((exp) => exp.date === formatted_curr_date).
+                                reduce((sum, exp) => {return sum+exp.amount}, 0);
+
+        el_today_expenses.innerText = `PKR ${curr_expenses.toLocaleString()}`;
+
+    }catch(e){
+        console.log("Error in setting today expenses:", e);
+    }
 
 }
 

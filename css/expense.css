@@ -133,9 +133,11 @@ header button{
 
 /* Expenses */
 
-.recent-expenses table{
+table{
     width: 100%;
     border-collapse: collapse;
+
+    text-align: center;
 }
 
 .expense{
@@ -146,6 +148,23 @@ header button{
 .expense td, .expense th{
     padding: 0.8rem;
     border-bottom: 1px solid var(--color-border);
+}
+
+/* Footer */
+
+footer{
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: auto;
+
+    gap: 0.5rem;
+}
+
+footer button{
+    width: 2rem;
 }
 
 /* Effects */
