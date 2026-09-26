@@ -81,6 +81,10 @@ function addExpense(expense){
     expense_delete_btn.classList.add("fa-solid");
     expense_delete_btn.classList.add("fa-trash");
 
+    expense_delete_btn.onclick = () => {
+        table.removeChild(expense_row);
+    };
+
     expense_actions_div.appendChild(expense_view_btn);
     expense_actions_div.appendChild(expense_edit_btn);
     expense_actions_div.appendChild(expense_delete_btn);
