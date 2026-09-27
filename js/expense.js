@@ -11,6 +11,11 @@ setupAddExpenseDialog();
 renderAllExpenses();
 
 function renderAllExpenses(){
+
+    const table = document.querySelector("table tbody");
+
+    table.innerHTML = "";
+
     for(const exp of all_expenses){
         addExpense(exp);
     }
