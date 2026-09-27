@@ -63,7 +63,7 @@ function addExpense(expense){
         btn_update_expense_dlg.onclick = () => {
             expense_title.innerText = update_expense_title.value;
             expense_category.innerText = update_expense_category.value;
-            expense_amount.innerText = update_expense_amount.value;
+            expense_amount.innerText = parseInt(update_expense_amount.value).toLocaleString();
 
             expense.title = update_expense_title.value;
             expense.category = update_expense_category.value;
