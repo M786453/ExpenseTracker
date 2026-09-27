@@ -165,12 +165,10 @@ dialog{
 }
 
 .dialog-content{
-    text-align: center;
-}
-
-.dialog-content{
     display: flex;
     flex-direction: column;
+
+    text-align: center;
 
     gap: 1rem;
 }
