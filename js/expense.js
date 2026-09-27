@@ -159,15 +159,42 @@ function updateExpense(expense, el_expense_title, el_expense_category, el_expens
     const btn_close_expense_dlg = document.getElementById("btn-close-update-expense-dlg");
 
     btn_update_expense_dlg.onclick = () => {
-        el_expense_title.innerText = update_expense_title.value;
-        el_expense_category.innerText = update_expense_category.value;
-        el_expense_amount.innerText = parseFloat(update_expense_amount.value).toLocaleString();
 
-        expense.title = update_expense_title.value;
-        expense.category = update_expense_category.value;
-        expense.amount = parseFloat(update_expense_amount.value);
-        expense.notes = update_expense_notes.value;
-        expense.date_modified = formateDate(new Date());
+        const exp_title = update_expense_title.value.trim();
+        const exp_category = update_expense_category.value;
+        const exp_amount = parseFloat(update_expense_amount.value);
+        const exp_notes = update_expense_notes.value;
+        const exp_date_modified = formateDate(new Date());
+
+        if(!exp_title){
+            alert("Please enter expense title.");
+            return;
+        }
+
+        if(!exp_category){
+            alert("Please enter expense category.");
+            return;
+        }
+
+        if(!exp_amount || exp_amount <= 0){
+            alert("Please enter valid expense amount.");
+            return;
+        }
+
+        if(!exp_notes){
+            alert("Please enter expense notes.");
+            return;
+        }
+
+        el_expense_title.innerText = exp_title;
+        el_expense_category.innerText = exp_category;
+        el_expense_amount.innerText = exp_amount.toLocaleString();
+
+        expense.title = exp_title;
+        expense.category = exp_category;
+        expense.amount = exp_amount;
+        expense.notes = exp_notes;
+        expense.date_modified = exp_date_modified;
 
         for(const exp_index in all_expenses){
             
@@ -212,19 +239,47 @@ function setupAddExpenseDialog(){
     btn_close_expense_dlg.onclick = () => add_expense_popup.close();
 
     btn_add_expense_dlg.onclick = () => {
-        const expense_title = document.getElementById("expense-title-dlg");
-        const expense_category = document.getElementById("expense-category-dlg");
-        const expense_amount = document.getElementById("expense-amount-dlg");
-        const expense_notes = document.getElementById("expense-notes-dlg");
+        
+        const el_expense_title = document.getElementById("expense-title-dlg");
+        const exp_title = el_expense_title.value.trim();
+        
+        const el_expense_category = document.getElementById("expense-category-dlg");
+        const exp_category = el_expense_category.value;
+        
+        const el_expense_amount = document.getElementById("expense-amount-dlg");
+        const exp_amount = parseFloat(el_expense_amount.value);
+
+        const el_expense_notes = document.getElementById("expense-notes-dlg");
+        const exp_notes = el_expense_notes.value;
+
+        if(!exp_title){
+            alert("Please enter an expense title.");
+            return;
+        }
+
+        if(!exp_category){
+            alert("Please select expense category.");
+            return;
+        }
+
+        if(!exp_amount || exp_amount <= 0){
+            alert("Please enter a vaild amount.");
+            return;
+        }
+
+        if(!exp_notes){
+            alert("Please enter expense notes.");
+            return;
+        }
 
         const curr_date = formateDate(new Date());
 
         const expense = {
             "id": crypto.randomUUID(),
-            "title": expense_title.value,
-            "category": expense_category.value,
-            "amount": parseFloat(expense_amount.value),
-            "notes": expense_notes.value,
+            "title": exp_title,
+            "category": exp_category,
+            "amount": exp_amount,
+            "notes": exp_notes,
             "date_created": curr_date,
             "date_modified": curr_date
         }; 
@@ -237,10 +292,10 @@ function setupAddExpenseDialog(){
 
         addExpense(expense);
 
-        expense_title.value = "";
-        expense_category.value = "";
-        expense_amount.value = "";
-        expense_notes.value = "";
+        el_expense_title.value = "";
+        el_expense_category.value = "";
+        el_expense_amount.value = "";
+        el_expense_notes.value = "";
 
         console.log("Expense:", all_expenses[all_expenses.length-1]);
 
