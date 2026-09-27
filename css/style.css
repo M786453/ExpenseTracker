@@ -34,6 +34,19 @@ main{
     display: flex;
 }
 
+button{
+
+    width: 5rem;
+    font-weight: bold;
+
+    background-color: var(--color-sidebar);
+    color: var(--color-surface);
+
+    border: none;
+
+    padding: 0.5rem;
+}
+
 /** Sidebar **/
 
 aside{
@@ -129,19 +142,6 @@ article{
     list-style: none;
 }
 
-.expenses-period button{
-
-    width: 5rem;
-    font-weight: bold;
-
-    background-color: var(--color-sidebar);
-    color: var(--color-surface);
-
-    border: none;
-
-    padding: 0.5rem;
-}
-
 .expenses-period button.active{
     background-color: var(--color-text);
 }
@@ -174,6 +174,16 @@ article{
 
 /* Recent Expenses */
 
+.recent-expenses{
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 1rem;
+}
+
 .recent-expenses table{
     width: 100%;
     border-collapse: collapse;
@@ -200,7 +210,7 @@ nav a:hover{
     background-color: var(--color-text);
 }
 
-.expenses-period button:hover{
+button:hover{
     cursor: pointer;
 
     background-color: var(--color-text);
