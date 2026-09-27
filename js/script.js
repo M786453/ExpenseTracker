@@ -111,7 +111,9 @@ function renderRecentExpenses(){
 
     console.log("Expenses Table Body:", expenses_table_body);
 
-    for(const exp of expenses){
+    for(let exp_idx = expenses.length-5; exp_idx < expenses.length; exp_idx++){
+
+        const exp = expenses[exp_idx];
 
         const expense_row = document.createElement("tr");
 
