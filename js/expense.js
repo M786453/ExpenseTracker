@@ -90,7 +90,7 @@ function deleteExpense(expense){
 
     for(const exp_index in all_expenses){
 
-        exp = all_expenses[exp_index];
+        const exp = all_expenses[exp_index];
 
         if(exp.id === expense.id){
             all_expenses.splice(exp_index,1);
@@ -161,17 +161,17 @@ function updateExpense(expense, el_expense_title, el_expense_category, el_expens
     btn_update_expense_dlg.onclick = () => {
         el_expense_title.innerText = update_expense_title.value;
         el_expense_category.innerText = update_expense_category.value;
-        el_expense_amount.innerText = parseInt(update_expense_amount.value).toLocaleString();
+        el_expense_amount.innerText = parseFloat(update_expense_amount.value).toLocaleString();
 
         expense.title = update_expense_title.value;
         expense.category = update_expense_category.value;
-        expense.amount = parseInt(update_expense_amount.value);
+        expense.amount = parseFloat(update_expense_amount.value);
         expense.notes = update_expense_notes.value;
         expense.date_modified = formateDate(new Date());
 
         for(const exp_index in all_expenses){
             
-            exp = all_expenses[exp_index];
+            const exp = all_expenses[exp_index];
 
             if(exp.id === expense.id){
                 all_expenses[exp_index] = expense;
@@ -223,7 +223,7 @@ function setupAddExpenseDialog(){
             "id": crypto.randomUUID(),
             "title": expense_title.value,
             "category": expense_category.value,
-            "amount": parseInt(expense_amount.value),
+            "amount": parseFloat(expense_amount.value),
             "notes": expense_notes.value,
             "date_created": curr_date,
             "date_modified": curr_date
