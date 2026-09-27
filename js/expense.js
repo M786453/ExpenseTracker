@@ -1,6 +1,20 @@
-const all_expenses = [];
+let all_expenses = [];
+
+if(localStorage.getItem("all_expenses")){
+    all_expenses = JSON.parse(localStorage.getItem("all_expenses"));
+
+    console.log("Fetched expenses:", all_expenses);
+}
 
 setupAddExpenseDialog();
+
+renderAllExpenses();
+
+function renderAllExpenses(){
+    for(const exp of all_expenses){
+        addExpense(exp);
+    }
+}
 
 function addExpense(expense){
 
@@ -40,47 +54,9 @@ function addExpense(expense){
     expense_edit_btn.classList.add("fa-solid");
     expense_edit_btn.classList.add("fa-pencil");
 
-    expense_edit_btn.onclick = () => {
-        
-        const update_expense_dialog = document.getElementById("update-expense-dialog");
-
-        const update_expense_title = document.getElementById("update-expense-title-dlg");
-        update_expense_title.value = expense.title;
-
-        const update_expense_category = document.getElementById("update-expense-category-dlg");
-        update_expense_category.value = expense.category;
-
-        const update_expense_amount = document.getElementById("update-expense-amount-dlg");
-        update_expense_amount.value = expense.amount;
-
-        const update_expense_notes = document.getElementById("update-expense-notes-dlg");
-        update_expense_notes.value = expense.notes;
-
-        const btn_update_expense_dlg = document.getElementById("btn-update-expense-dlg");
-
-        const btn_close_expense_dlg = document.getElementById("btn-close-update-expense-dlg");
-
-        btn_update_expense_dlg.onclick = () => {
-            expense_title.innerText = update_expense_title.value;
-            expense_category.innerText = update_expense_category.value;
-            expense_amount.innerText = parseInt(update_expense_amount.value).toLocaleString();
-
-            expense.title = update_expense_title.value;
-            expense.category = update_expense_category.value;
-            expense.amount = update_expense_amount.value;
-            expense.notes = update_expense_notes.value;
-            expense.date_modified = formateDate(new Date());
-
-            update_expense_dialog.close();
-        }
-
-        btn_close_expense_dlg.onclick = () => {
-            console.log("closing update dialog...");
-            update_expense_dialog.close();
-        }
-
-        update_expense_dialog.showModal();
-
+    expense_edit_btn.onclick = () => {  
+        console.log("Updating expense...");
+        updateExpense(expense, expense_title, expense_category, expense_amount);
     }
 
     const expense_delete_btn = document.createElement("i");
@@ -88,6 +64,10 @@ function addExpense(expense){
     expense_delete_btn.classList.add("fa-trash");
 
     expense_delete_btn.onclick = () => {
+        console.log("Deleting expense...");
+        
+        deleteExpense(expense);
+
         table.removeChild(expense_row);
     };
 
@@ -104,6 +84,24 @@ function addExpense(expense){
     expense_row.appendChild(expense_actions);
 
     table.appendChild(expense_row);
+}
+
+function deleteExpense(expense){
+
+    for(const exp_index in all_expenses){
+
+        exp = all_expenses[exp_index];
+
+        if(exp.id === expense.id){
+            all_expenses.splice(exp_index,1);
+            console.log("Expense Removed.");
+            break;
+        }
+
+    }
+
+    localStorage.setItem("all_expenses", JSON.stringify(all_expenses));
+    
 }
 
 function viewExpense(expense){
@@ -137,6 +135,64 @@ function viewExpense(expense){
     }
 
     view_expense_dialog.showModal();
+
+}
+
+function updateExpense(expense, el_expense_title, el_expense_category, el_expense_amount){
+
+    const update_expense_dialog = document.getElementById("update-expense-dialog");
+
+    const update_expense_title = document.getElementById("update-expense-title-dlg");
+    update_expense_title.value = expense.title;
+
+    const update_expense_category = document.getElementById("update-expense-category-dlg");
+    update_expense_category.value = expense.category;
+
+    const update_expense_amount = document.getElementById("update-expense-amount-dlg");
+    update_expense_amount.value = expense.amount;
+
+    const update_expense_notes = document.getElementById("update-expense-notes-dlg");
+    update_expense_notes.value = expense.notes;
+
+    const btn_update_expense_dlg = document.getElementById("btn-update-expense-dlg");
+
+    const btn_close_expense_dlg = document.getElementById("btn-close-update-expense-dlg");
+
+    btn_update_expense_dlg.onclick = () => {
+        el_expense_title.innerText = update_expense_title.value;
+        el_expense_category.innerText = update_expense_category.value;
+        el_expense_amount.innerText = parseInt(update_expense_amount.value).toLocaleString();
+
+        expense.title = update_expense_title.value;
+        expense.category = update_expense_category.value;
+        expense.amount = update_expense_amount.value;
+        expense.notes = update_expense_notes.value;
+        expense.date_modified = formateDate(new Date());
+
+        for(const exp_index in all_expenses){
+            
+            exp = all_expenses[exp_index];
+
+            if(exp.id === expense.id){
+                all_expenses[exp_index] = expense;
+                break;
+            }
+
+        }
+
+        localStorage.setItem("all_expenses", JSON.stringify(all_expenses));
+
+        console.log("Updated Expenses:", all_expenses);
+
+        update_expense_dialog.close();
+    }
+
+    btn_close_expense_dlg.onclick = () => {
+        console.log("closing update dialog...");
+        update_expense_dialog.close();
+    }
+
+    update_expense_dialog.showModal();
 
 }
 
@@ -174,6 +230,10 @@ function setupAddExpenseDialog(){
         }; 
 
         all_expenses.push(expense);
+
+        localStorage.setItem("all_expenses", JSON.stringify(all_expenses));
+
+        console.log("All Expenses:", all_expenses);
 
         addExpense(expense);
 
