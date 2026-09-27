@@ -1,47 +1,10 @@
-const expenses = [
-    {
-        "id": crypto.randomUUID(),
-        "title": "Grocery",
-        "category": "Food",
-        "amount": 2500,
-        "date": "2026-09-26"
-    },
-    {
-        "id": crypto.randomUUID(),
-        "title": "Fuel",
-        "category": "Travel",
-        "amount": 500,
-        "date": "2026-09-26"
-    },
-    {
-        "id": crypto.randomUUID(),
-        "title": "Grocery",
-        "category": "Food",
-        "amount": 100,
-        "date": "2026-09-21"
-    },
-    {
-        "id": crypto.randomUUID(),
-        "title": "Checkup",
-        "category": "Health",
-        "amount": 1500,
-        "date": "2026-09-22"
-    },
-    {
-        "id": crypto.randomUUID(),
-        "title": "Grocery",
-        "category": "Food",
-        "amount": 500,
-        "date": "2026-09-01"
-    },
-    {
-        "id": crypto.randomUUID(),
-        "title": "Fuel",
-        "category": "Travel",
-        "amount": 5500,
-        "date": "2026-08-05"
-    }
-]
+let expenses = [];
+
+if(localStorage.getItem("all_expenses")){
+    expenses = JSON.parse(localStorage.getItem("all_expenses"));
+
+    console.log("All Expenses:", expenses);
+}
 
 const el_total_expenses = document.getElementById("total-expenses");
 const el_today_expenses = document.getElementById("today-expenses");
@@ -71,7 +34,11 @@ function setWeekExpenses(){
         const endWeekDate = new Date(curr_date.setDate(diff+6));
 
         const weekExpenses = expenses.reduce((sum, exp) => {
-            const exp_date = new Date(exp.date);
+
+            const exp_date = new Date(exp.date_created);
+            exp_date.setHours(0,0,0,0);
+
+            console.log("Expense Date:", exp_date);
 
             if(exp_date >= startWeekDate && exp_date <= endWeekDate){
                 sum += exp.amount
@@ -117,7 +84,7 @@ function setTodayExpenses(){
 
         const formatted_curr_date = formateDate(curr_date);
 
-        const curr_expenses = expenses.filter((exp) => exp.date === formatted_curr_date).
+        const curr_expenses = expenses.filter((exp) => exp.date_created === formatted_curr_date).
                                 reduce((sum, exp) => {return sum+exp.amount}, 0);
 
         el_today_expenses.innerText = `PKR ${curr_expenses.toLocaleString()}`;
@@ -160,7 +127,7 @@ function renderRecentExpenses(){
         amount.innerText = `PKR ${exp.amount.toLocaleString()}`;
 
         const date = document.createElement("td");
-        date.innerText = exp.date;
+        date.innerText = exp.date_created;
 
         expense_row.appendChild(title);
         expense_row.appendChild(category);
