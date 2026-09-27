@@ -22,6 +22,8 @@ function addExpense(expense){
 
     const expense_row = document.createElement("tr");
 
+    expense_row.dataset.id = expense.id;
+
     expense_row.classList.add("expense");
 
     const expense_title = document.createElement("td");
