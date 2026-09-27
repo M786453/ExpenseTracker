@@ -31,7 +31,7 @@ function addExpense(expense){
     expense_category.innerText = expense.category;
 
     const expense_amount = document.createElement("td");
-    expense_amount.innerText = parseInt(expense.amount).toLocaleString();
+    expense_amount.innerText = expense.amount.toLocaleString();
 
     const expense_date = document.createElement("td");
     expense_date.innerText = expense.date_created;
@@ -115,7 +115,7 @@ function viewExpense(expense){
     view_expense_category.innerText = expense.category;
 
     const view_expense_amount = document.getElementById("view-expense-amount");
-    view_expense_amount.innerText = parseInt(expense.amount).toLocaleString();
+    view_expense_amount.innerText = expense.amount.toLocaleString();
 
     const view_expense_notes = document.getElementById("view-expense-notes");
     view_expense_notes.innerText = expense.notes;
@@ -165,7 +165,7 @@ function updateExpense(expense, el_expense_title, el_expense_category, el_expens
 
         expense.title = update_expense_title.value;
         expense.category = update_expense_category.value;
-        expense.amount = update_expense_amount.value;
+        expense.amount = parseInt(update_expense_amount.value);
         expense.notes = update_expense_notes.value;
         expense.date_modified = formateDate(new Date());
 
@@ -223,7 +223,7 @@ function setupAddExpenseDialog(){
             "id": crypto.randomUUID(),
             "title": expense_title.value,
             "category": expense_category.value,
-            "amount": expense_amount.value,
+            "amount": parseInt(expense_amount.value),
             "notes": expense_notes.value,
             "date_created": curr_date,
             "date_modified": curr_date
