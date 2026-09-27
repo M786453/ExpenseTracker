@@ -63,7 +63,7 @@ function addExpense(expense){
 
     expense_edit_btn.onclick = () => {  
         console.log("Updating expense...");
-        updateExpense(expense, expense_title, expense_category, expense_amount);
+        updateExpense(expense);
     }
 
     const expense_delete_btn = document.createElement("i");
@@ -145,7 +145,7 @@ function viewExpense(expense){
 
 }
 
-function updateExpense(expense, el_expense_title, el_expense_category, el_expense_amount){
+function updateExpense(expense){
 
     const update_expense_dialog = document.getElementById("update-expense-dialog");
 
@@ -193,30 +193,17 @@ function updateExpense(expense, el_expense_title, el_expense_category, el_expens
             return;
         }
 
-        el_expense_title.innerText = exp_title;
-        el_expense_category.innerText = exp_category;
-        el_expense_amount.innerText = exp_amount.toLocaleString();
-
         expense.title = exp_title;
         expense.category = exp_category;
         expense.amount = exp_amount;
         expense.notes = exp_notes;
         expense.date_modified = exp_date_modified;
 
-        for(const exp_index in all_expenses){
-            
-            const exp = all_expenses[exp_index];
-
-            if(exp.id === expense.id){
-                all_expenses[exp_index] = expense;
-                break;
-            }
-
-        }
-
         localStorage.setItem("all_expenses", JSON.stringify(all_expenses));
 
         console.log("Updated Expenses:", all_expenses);
+
+        renderAllExpenses();
 
         update_expense_dialog.close();
     }
