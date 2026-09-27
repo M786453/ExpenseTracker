@@ -246,6 +246,9 @@ function setupAddExpenseDialog(){
         const el_expense_notes = document.getElementById("expense-notes-dlg");
         const exp_notes = el_expense_notes.value;
 
+        const el_expense_date = document.getElementById("expense-date-dlg");
+        const exp_date = el_expense_date.value;
+
         if(!exp_title){
             alert("Please enter an expense title.");
             return;
@@ -266,7 +269,10 @@ function setupAddExpenseDialog(){
             return;
         }
 
-        const curr_date = formateDate(new Date());
+        if(!exp_date){
+            alert("Please enter expense date.");
+            return;
+        }
 
         const expense = {
             "id": crypto.randomUUID(),
@@ -274,8 +280,8 @@ function setupAddExpenseDialog(){
             "category": exp_category,
             "amount": exp_amount,
             "notes": exp_notes,
-            "date_created": curr_date,
-            "date_modified": curr_date
+            "date_created": exp_date,
+            "date_modified": exp_date
         }; 
 
         all_expenses.push(expense);
