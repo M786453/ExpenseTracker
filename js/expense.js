@@ -10,9 +10,11 @@ setupSearch();
 
 setupCategoryFilter();
 
+setupDateFilter();
+
 setupAddExpenseDialog();
 
-setupDateFilter();
+setupAmountRangeDailog();
 
 renderAllExpenses(all_expenses);
 
@@ -311,6 +313,73 @@ function setupAddExpenseDialog(){
 
 }
 
+function setupAmountRangeDailog(){
+
+    const el_amount_range = document.getElementById("amount-range");
+
+    const amount_range_dialog = document.getElementById("amount-range-dialog");
+
+    const amnt_range_apply =document.getElementById("amnt-range-apply");
+
+    const amnt_range_clear =document.getElementById("amnt-range-clear");
+
+    el_amount_range.onclick = () => {
+        amount_range_dialog.showModal();
+    };
+
+    amnt_range_apply.onclick = () => {
+
+        const el_start_range = document.getElementById("amount-range-start");
+
+        const el_end_range = document.getElementById("amount-range-end");
+
+        const start_range_value = el_start_range.value;
+
+        const end_range_value = el_end_range.value;
+
+        if(!start_range_value){
+            alert("Enter Start Range.");
+            return;
+        }
+
+        if(!end_range_value){
+            alert("Enter End Range.");
+            return;
+        }
+
+        const start_range = parseFloat(start_range_value);
+
+        const end_range = parseFloat(end_range_value);
+
+        const filteredExpenses = filterExpensesByAmountRange(start_range, end_range);
+
+        el_amount_range.innerText = `PKR. ${start_range} - ${end_range}`
+
+        renderAllExpenses(filteredExpenses);
+
+        amount_range_dialog.close();
+
+    };
+
+    amnt_range_clear.onclick = () => {
+
+        const el_start_range = document.getElementById("amount-range-start");
+
+        const el_end_range = document.getElementById("amount-range-end");
+
+        el_start_range.value = "";
+
+        el_end_range.value = "";
+
+        el_amount_range.innerText = "Amount Range";
+
+        renderAllExpenses(all_expenses);
+
+        amount_range_dialog.close();
+    };
+
+}
+
 function formateDate(current_date){
     if(current_date){
         const day = String(current_date.getDate()).padStart(2, "0");
@@ -409,4 +478,8 @@ function filterExpensesByDate(selected_date){
     }
 
     return all_expenses.filter(exp => exp.date_created === selected_date);
+}
+
+function filterExpensesByAmountRange(start_range, end_range){
+    return all_expenses.filter(exp => exp.amount >= start_range && exp.amount <= end_range);
 }

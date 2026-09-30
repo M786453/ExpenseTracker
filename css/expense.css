@@ -230,6 +230,34 @@ dialog{
     text-align: left;
 }
 
+/* Amount Range Popup */
+
+.amnt-rng-dlg-content{
+    display: flex;
+    flex-direction: column;
+
+    gap: 1rem;
+}
+
+.amnt-rng-dlg-content h2{
+    text-align: center;
+}
+
+.amnt-rng-dlg-content .input-section{
+    display: flex;
+    flex-direction: column;
+
+    gap: 0.2rem;
+}
+
+.amnt-rng-dlg-content input{
+    padding: 0.8rem;
+}
+
+.amnt-rng-dlg-content .actions{
+    text-align: center;
+}
+
 /* Footer */
 
 footer{

@@ -39,7 +39,7 @@
                         <option value="Others">Others</option>
                     </select>
                     <input type="date" id="dateFilter">
-                    <button>Amount</button>
+                    <button id="amount-range">Amount Range</span></button>
                 </div>
 
                 <table>
@@ -128,6 +128,28 @@
                         <div class="popup-actions">
                             <button id="btn-update-expense-dlg">Update</button>
                             <button id="btn-close-update-expense-dlg">Close</button>
+                        </div>
+                    </div>
+                </dialog>
+
+                <dialog id="amount-range-dialog">
+                    <div class="amnt-rng-dlg-content">
+
+                        <h2>Enter Amount Range</h2>
+                        
+                        <div class="input-section">
+                            <label for="amount-range-start">Range Start</label>
+                            <input type="number" placeholder="Enter Range Start" id="amount-range-start">
+                        </div>
+
+                        <div class="input-section">
+                            <label for="amount-range-end">Range End</label>
+                            <input type="number" placeholder="Enter Range End" id="amount-range-end">
+                        </div>
+
+                        <div class="actions">
+                            <button id="amnt-range-apply">Apply</button>
+                            <button id="amnt-range-clear">Clear</button>
                         </div>
                     </div>
                 </dialog>
