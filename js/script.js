@@ -113,30 +113,39 @@ function renderRecentExpenses(){
 
     for(let exp_idx = expenses.length-5; exp_idx < expenses.length; exp_idx++){
 
-        const exp = expenses[exp_idx];
+        try{
 
-        const expense_row = document.createElement("tr");
+            const exp = expenses[exp_idx];
 
-        expense_row.classList.add("expense");
+            if(!exp)
+                continue
 
-        const title = document.createElement("td");
-        title.innerText = exp.title;
+            const expense_row = document.createElement("tr");
 
-        const category = document.createElement("td");
-        category.innerText = exp.category;
+            expense_row.classList.add("expense");
 
-        const amount = document.createElement("td");
-        amount.innerText = `PKR ${exp.amount.toLocaleString()}`;
+            const title = document.createElement("td");
+            title.innerText = exp.title;
 
-        const date = document.createElement("td");
-        date.innerText = exp.date_created;
+            const category = document.createElement("td");
+            category.innerText = exp.category;
 
-        expense_row.appendChild(title);
-        expense_row.appendChild(category);
-        expense_row.appendChild(amount);
-        expense_row.appendChild(date);
+            const amount = document.createElement("td");
+            amount.innerText = `PKR ${exp.amount.toLocaleString()}`;
 
-        expenses_table_body.appendChild(expense_row);
+            const date = document.createElement("td");
+            date.innerText = exp.date_created;
+
+            expense_row.appendChild(title);
+            expense_row.appendChild(category);
+            expense_row.appendChild(amount);
+            expense_row.appendChild(date);
+
+            expenses_table_body.appendChild(expense_row);
+
+        }catch(e){
+            console.log("Errror in rendering recent expenses:", e);
+        }
     }
 
     
