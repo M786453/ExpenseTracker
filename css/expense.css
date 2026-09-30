@@ -131,7 +131,7 @@ header button{
     width: 10rem;
 }
 
-.search-filters select{
+.search-filters select, .search-filters input{
     background-color: var(--color-sidebar);
     color: var(--color-surface);
 
@@ -140,9 +140,15 @@ header button{
     font-size: 0.9rem;
     font-weight: bold;
 
+    color-scheme: dark;
+
     height: 3rem;
 
     border: none;
+
+    cursor: pointer;
+
+    user-select: none;
 }
 
 /* Expenses */

@@ -12,6 +12,8 @@ setupCategoryFilter();
 
 setupAddExpenseDialog();
 
+setupDateFilter();
+
 renderAllExpenses(all_expenses);
 
 function renderAllExpenses(expenses){
@@ -374,6 +376,37 @@ function setupCategoryFilter(){
 
 }
 
+function setupDateFilter(){
+
+    const dateFilter = document.getElementById("dateFilter");
+
+    dateFilter.onclick = () => {
+        dateFilter.showPicker();
+    }
+
+    dateFilter.onchange = () => {
+
+        const selectedDate = dateFilter.value;
+
+        console.log("Selected Date:", selectedDate);
+
+        const expensesByDate = filterExpensesByDate(selectedDate);
+
+        renderAllExpenses(expensesByDate);
+
+    }
+
+}
+
 function filterExpensesByCategory(category){
     return all_expenses.filter(exp => exp.category === category);
+}
+
+function filterExpensesByDate(selected_date){
+
+    if(!selected_date){
+        return all_expenses;
+    }
+
+    return all_expenses.filter(exp => exp.date_created === selected_date);
 }
