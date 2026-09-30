@@ -8,6 +8,8 @@ if(localStorage.getItem("all_expenses")){
 
 setupSearch();
 
+setupCategoryFilter();
+
 setupAddExpenseDialog();
 
 renderAllExpenses(all_expenses);
@@ -348,4 +350,30 @@ function searchExpenses(search_element, timeoutId){
         renderAllExpenses(searched_expenses);
 
     }, 500);
+}
+
+function setupCategoryFilter(){
+
+    const el_category = document.getElementById("category-filter");
+
+    el_category.onchange = (e) => {
+
+        const selected_category = el_category.value;
+
+        if(selected_category === "All Categories"){
+            renderAllExpenses(all_expenses);
+            return;
+        }
+
+
+        const expensesBySelectedCategory = filterExpensesByCategory(selected_category);
+
+        renderAllExpenses(expensesBySelectedCategory);
+
+    };
+
+}
+
+function filterExpensesByCategory(category){
+    return all_expenses.filter(exp => exp.category === category);
 }

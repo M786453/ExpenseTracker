@@ -131,6 +131,20 @@ header button{
     width: 10rem;
 }
 
+.search-filters select{
+    background-color: var(--color-sidebar);
+    color: var(--color-surface);
+
+    padding: 0.2rem;
+
+    font-size: 0.9rem;
+    font-weight: bold;
+
+    height: 3rem;
+
+    border: none;
+}
+
 /* Expenses */
 
 table{
