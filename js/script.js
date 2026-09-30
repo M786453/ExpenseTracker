@@ -29,9 +29,15 @@ function setWeekExpenses(){
 
         const diff = curr_date.getDate() - day + (day === 0 ? -6 : 1);
 
-        const startWeekDate = new Date(curr_date.setDate(diff));
+        const startWeekDate = new Date();
+        startWeekDate.setDate(diff);
 
-        const endWeekDate = new Date(curr_date.setDate(diff+6));
+        console.log("Start Date:", startWeekDate);
+
+        const endWeekDate = new Date();
+        endWeekDate.setDate(diff+6);
+
+        console.log("End Week Date:", endWeekDate);
 
         const weekExpenses = expenses.reduce((sum, exp) => {
 
