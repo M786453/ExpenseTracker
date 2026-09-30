@@ -6,17 +6,19 @@ if(localStorage.getItem("all_expenses")){
     console.log("Fetched expenses:", all_expenses);
 }
 
+setupSearch();
+
 setupAddExpenseDialog();
 
-renderAllExpenses();
+renderAllExpenses(all_expenses);
 
-function renderAllExpenses(){
+function renderAllExpenses(expenses){
 
     const table = document.querySelector("table tbody");
 
     table.innerHTML = "";
 
-    for(const exp of all_expenses){
+    for(const exp of expenses){
         addExpense(exp);
     }
 }
@@ -203,7 +205,7 @@ function updateExpense(expense){
 
         console.log("Updated Expenses:", all_expenses);
 
-        renderAllExpenses();
+        renderAllExpenses(all_expenses);
 
         update_expense_dialog.close();
     }
@@ -312,4 +314,38 @@ function formateDate(current_date){
         return `${current_date.getFullYear()}-${month}-${day}`
     }
     return null;
+}
+
+function setupSearch(){
+    const el_search = document.getElementById("search");
+
+    console.log("Search Element:", el_search);
+
+    let timeoutId = null;
+
+    el_search.onkeydown = (e) => {  
+
+        timeoutId = searchExpenses(el_search, timeoutId);
+
+    };
+}
+
+function searchExpenses(search_element, timeoutId){
+
+    if(timeoutId)
+        clearTimeout(timeoutId);
+
+    return setTimeout(() => {
+
+        const search_keyword = search_element.value;
+
+        console.log("Search Keyword:", search_keyword);
+
+        const searched_expenses = all_expenses.filter(exp => exp.title.toLowerCase().includes(search_keyword.toLowerCase()));
+
+        console.log("Searched Expenses:", searched_expenses);
+
+        renderAllExpenses(searched_expenses);
+
+    }, 500);
 }
