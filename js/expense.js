@@ -353,7 +353,7 @@ function setupAmountRangeDailog(){
 
         const filteredExpenses = filterExpensesByAmountRange(start_range, end_range);
 
-        el_amount_range.innerText = `PKR. ${start_range} - ${end_range}`
+        el_amount_range.innerText = `PKR. (${start_range} - ${end_range})`
 
         renderAllExpenses(filteredExpenses);
 
