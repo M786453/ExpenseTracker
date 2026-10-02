@@ -351,11 +351,11 @@ function setupAmountRangeDailog(){
 
         const end_range = parseFloat(end_range_value);
 
-        const filteredExpenses = filterExpensesByAmountRange(start_range, end_range);
-
-        el_amount_range.innerText = `PKR. (${start_range} - ${end_range})`
+        const filteredExpenses = filterExpenses();
 
         renderAllExpenses(filteredExpenses);
+
+        el_amount_range.innerText = `PKR. (${start_range} - ${end_range})`
 
         amount_range_dialog.close();
 
@@ -373,7 +373,9 @@ function setupAmountRangeDailog(){
 
         el_amount_range.innerText = "Amount Range";
 
-        renderAllExpenses(all_expenses);
+        const filteredExpenses = filterExpenses();
+
+        renderAllExpenses(filteredExpenses);
 
         amount_range_dialog.close();
     };
@@ -429,17 +431,9 @@ function setupCategoryFilter(){
 
     el_category.onchange = (e) => {
 
-        const selected_category = el_category.value;
+        const filteredExpenses = filterExpenses();
 
-        if(selected_category === "All Categories"){
-            renderAllExpenses(all_expenses);
-            return;
-        }
-
-
-        const expensesBySelectedCategory = filterExpensesByCategory(selected_category);
-
-        renderAllExpenses(expensesBySelectedCategory);
+        renderAllExpenses(filteredExpenses);
 
     };
 
@@ -455,31 +449,77 @@ function setupDateFilter(){
 
     dateFilter.onchange = () => {
 
-        const selectedDate = dateFilter.value;
+        const filteredExpenses = filterExpenses();
 
-        console.log("Selected Date:", selectedDate);
-
-        const expensesByDate = filterExpensesByDate(selectedDate);
-
-        renderAllExpenses(expensesByDate);
+        renderAllExpenses(filteredExpenses);
 
     }
 
 }
 
-function filterExpensesByCategory(category){
-    return all_expenses.filter(exp => exp.category === category);
+function filterExpenses(){
+
+    const category_value = document.getElementById("category-filter").value;
+
+    const date_value = document.getElementById("dateFilter").value;
+
+    let start_range = document.getElementById("amount-range-start").value;
+
+    if(!start_range)
+        start_range = parseFloat(start_range);
+
+    let end_range = document.getElementById("amount-range-end").value;
+
+    if(!end_range)
+        end_range = parseFloat(end_range);
+
+    let filtered_expenses = all_expenses;
+
+    console.log("Category:", category_value);
+
+    filtered_expenses = filterExpensesByCategory(category_value, all_expenses);
+
+    console.log("Category Filtered Expenses:", filtered_expenses);
+
+    console.log("Date:", date_value);
+
+    filtered_expenses = filterExpensesByDate(date_value, filtered_expenses);
+
+    console.log("Date Filtered Expenses:", filtered_expenses);
+
+    console.log("Start Range:", start_range);
+
+    console.log("End Range:", end_range);
+
+    filtered_expenses = filterExpensesByAmountRange(start_range, end_range, filtered_expenses);
+
+    console.log("Amount Filtered Expenses:", filtered_expenses);
+
+    return filtered_expenses;
 }
 
-function filterExpensesByDate(selected_date){
+function filterExpensesByCategory(category, expenses){
+
+    if(category === "All Categories")
+        return expenses;
+
+    return expenses.filter(exp => exp.category === category);
+}
+
+function filterExpensesByDate(selected_date, expenses){
 
     if(!selected_date){
-        return all_expenses;
+        return expenses;
     }
 
-    return all_expenses.filter(exp => exp.date_created === selected_date);
+    return expenses.filter(exp => exp.date_created === selected_date);
 }
 
-function filterExpensesByAmountRange(start_range, end_range){
-    return all_expenses.filter(exp => exp.amount >= start_range && exp.amount <= end_range);
+function filterExpensesByAmountRange(start_range, end_range, expenses){
+
+    if(start_range && end_range && start_range > 0 && end_range > 0){
+        return expenses.filter(exp => exp.amount >= start_range && exp.amount <= end_range);
+    }else{
+        return expenses;
+    }
 }
