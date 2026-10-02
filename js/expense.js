@@ -392,35 +392,28 @@ function formateDate(current_date){
 }
 
 function setupSearch(){
-    const el_search = document.getElementById("search");
 
-    console.log("Search Element:", el_search);
+    const el_search = document.getElementById("search");
 
     let timeoutId = null;
 
     el_search.onkeydown = (e) => {  
 
-        timeoutId = searchExpenses(el_search, timeoutId);
+        timeoutId = searchExpenses(timeoutId);
 
     };
 }
 
-function searchExpenses(search_element, timeoutId){
+function searchExpenses(timeoutId){
 
     if(timeoutId)
         clearTimeout(timeoutId);
 
     return setTimeout(() => {
 
-        const search_keyword = search_element.value;
+        const filteredExpenses = filterExpenses();
 
-        console.log("Search Keyword:", search_keyword);
-
-        const searched_expenses = all_expenses.filter(exp => exp.title.toLowerCase().includes(search_keyword.toLowerCase()));
-
-        console.log("Searched Expenses:", searched_expenses);
-
-        renderAllExpenses(searched_expenses);
+        renderAllExpenses(filteredExpenses);
 
     }, 500);
 }
@@ -459,6 +452,8 @@ function setupDateFilter(){
 
 function filterExpenses(){
 
+    const search_value = document.getElementById("search").value;
+
     const category_value = document.getElementById("category-filter").value;
 
     const date_value = document.getElementById("dateFilter").value;
@@ -475,9 +470,15 @@ function filterExpenses(){
 
     let filtered_expenses = all_expenses;
 
+    console.log("Search Value:", search_value);
+
+    filtered_expenses = filterExpensesByQuery(search_value, filtered_expenses);
+
+    console.log("Query Filtered Expenses:", filtered_expenses);
+
     console.log("Category:", category_value);
 
-    filtered_expenses = filterExpensesByCategory(category_value, all_expenses);
+    filtered_expenses = filterExpensesByCategory(category_value, filtered_expenses);
 
     console.log("Category Filtered Expenses:", filtered_expenses);
 
@@ -522,4 +523,8 @@ function filterExpensesByAmountRange(start_range, end_range, expenses){
     }else{
         return expenses;
     }
+}
+
+function filterExpensesByQuery(search_value, expenses){
+    return expenses.filter(exp => exp.title.toLowerCase().includes(search_value.toLowerCase()));
 }
