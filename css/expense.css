@@ -41,6 +41,10 @@ main{
 aside{
 
     width: 20rem;
+    height: 100vh;
+
+    position: fixed;
+
     padding: 1rem;
     background-color: var(--color-sidebar);
     color: var(--color-surface);
@@ -77,6 +81,8 @@ section{
     flex-direction: column;
 
     flex: 1;
+
+    margin-left: 20rem;
 
     padding: 1rem;
 
@@ -276,6 +282,11 @@ footer button{
 }
 
 /* Effects */
+
+nav a:hover{
+    background-color: var(--color-text);
+    color: var(--color-surface);
+}
 
 .expense:hover{
     background-color: var(--color-text);
