@@ -52,6 +52,10 @@ button{
 aside{
 
     width: 20rem;
+    height: 100vh;
+
+    position: fixed;
+
     padding: 1rem;
     background-color: var(--color-sidebar);
     color: var(--color-surface);
@@ -90,6 +94,8 @@ section{
     flex-direction: column;
 
     flex: 1;
+
+    margin-left: 20rem;
 
     padding: 1rem;
 
