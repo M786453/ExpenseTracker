@@ -281,6 +281,11 @@ footer button{
     width: 3rem;
 }
 
+footer button.active{
+    background-color: var(--color-text);
+    color: var(--color-surface);
+}
+
 /* Effects */
 
 nav a:hover{

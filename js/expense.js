@@ -1,5 +1,9 @@
 let all_expenses = [];
 
+let current_page_no = 1;
+
+let total_expenses_per_page = 3;
+
 if(localStorage.getItem("all_expenses")){
     all_expenses = JSON.parse(localStorage.getItem("all_expenses"));
 
@@ -24,9 +28,23 @@ function renderAllExpenses(expenses){
 
     table.innerHTML = "";
 
-    for(const exp of expenses){
-        addExpense(exp);
+    let exp_idx = 0;
+
+    if(current_page_no > 1)
+        exp_idx = (current_page_no*total_expenses_per_page) - total_expenses_per_page
+
+    while(exp_idx < current_page_no*total_expenses_per_page){
+        addExpense(expenses[exp_idx]);
+        exp_idx += 1;
     }
+
+    // render Footer with pagination
+
+    const total_pages = parseInt(expenses.length/total_expenses_per_page);
+
+    console.log("Total Expenses:", expenses.length);
+
+    renderFooter(total_pages);
 }
 
 function addExpense(expense){
@@ -497,6 +515,66 @@ function filterExpenses(){
     console.log("Amount Filtered Expenses:", filtered_expenses);
 
     return filtered_expenses;
+}
+
+function renderFooter(total_pages){
+
+    console.log("Total Pages:", total_pages);
+
+    const el_footer = document.querySelector("footer");
+
+    el_footer.innerHTML = "";
+
+    for(let i=1; i<=total_pages; i++){
+        
+        const btn_page = document.createElement("button");
+
+        if(current_page_no === i)
+            btn_page.classList.add("active");
+
+        btn_page.innerText = i;
+
+        btn_page.dataset.id = i;
+
+        btn_page.onclick = () => {
+            current_page_no = i;
+            renderAllExpenses(all_expenses);
+        }
+
+        el_footer.appendChild(btn_page);
+
+    }
+
+    if(total_pages > 1){
+
+        const last_page_btn = createLastPageButton(total_pages);
+
+        last_page_btn.onclick = () => {
+            current_page_no = total_pages;
+            renderAllExpenses(all_expenses);
+        }
+
+        el_footer.appendChild(last_page_btn);
+
+    }
+
+}
+
+function createLastPageButton(total_pages){
+
+    const last_page_btn = document.createElement("button");
+
+    last_page_btn.dataset.id = total_pages;
+
+    const last_page_btn_icon = document.createElement("i");
+
+    last_page_btn_icon.classList.add("fa-solid");
+
+    last_page_btn_icon.classList.add("fa-forward");
+
+    last_page_btn.appendChild(last_page_btn_icon);
+
+    return last_page_btn;
 }
 
 function filterExpensesByCategory(category, expenses){
