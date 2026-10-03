@@ -2,7 +2,7 @@ let all_expenses = [];
 
 let current_page_no = 1;
 
-let total_expenses_per_page = 3;
+let total_expenses_per_page = 5;
 
 if(localStorage.getItem("all_expenses")){
     all_expenses = JSON.parse(localStorage.getItem("all_expenses"));
@@ -40,7 +40,11 @@ function renderAllExpenses(expenses){
 
     // render Footer with pagination
 
-    const total_pages = parseInt(expenses.length/total_expenses_per_page);
+    let total_pages = parseInt(expenses.length/total_expenses_per_page);
+
+    if(expenses.length%total_expenses_per_page > 0){
+        total_pages += 1;
+    }
 
     console.log("Total Expenses:", expenses.length);
 
@@ -48,6 +52,9 @@ function renderAllExpenses(expenses){
 }
 
 function addExpense(expense){
+
+    if(!expense)
+        return
 
     const table = document.querySelector("table tbody");
 
