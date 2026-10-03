@@ -256,11 +256,6 @@ function updateExpense(expense){
             return;
         }
 
-        if(!exp_notes){
-            alert("Please enter expense notes.");
-            return;
-        }
-
         expense.title = exp_title;
         expense.category = exp_category;
         expense.amount = exp_amount;
@@ -344,11 +339,6 @@ function setupAddExpenseDialog(){
 
         if(!exp_amount || exp_amount <= 0){
             alert("Please enter a vaild amount.");
-            return;
-        }
-
-        if(!exp_notes){
-            alert("Please enter expense notes.");
             return;
         }
 
