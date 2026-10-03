@@ -576,7 +576,7 @@ function renderFooter(total_pages, expenses){
 
         last_page_btn.onclick = () => {
             current_page_no = total_pages;
-            renderAllExpenses(all_expenses);
+            renderAllExpenses(expenses);
         }
 
         el_footer.appendChild(last_page_btn);
