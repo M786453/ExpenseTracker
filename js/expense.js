@@ -483,15 +483,13 @@ function filterExpenses(){
 
     const date_value = document.getElementById("dateFilter").value;
 
-    let start_range = document.getElementById("amount-range-start").value;
+    const start_value = document.getElementById("amount-range-start").value;
 
-    if(!start_range)
-        start_range = parseFloat(start_range);
+    const start_range = start_value === "" ? null : Number(start_value);
 
-    let end_range = document.getElementById("amount-range-end").value;
+    const end_value = document.getElementById("amount-range-end").value;
 
-    if(!end_range)
-        end_range = parseFloat(end_range);
+    const end_range = end_value === "" ? null : Number(end_value);
 
     let filtered_expenses = all_expenses;
 
