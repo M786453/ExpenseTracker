@@ -376,6 +376,16 @@ function setupAmountRangeDailog(){
 
         const end_range = parseFloat(end_range_value);
 
+        if(start_range < 0 || end_range < 0){
+            alert("Either of the range is negative. Please enter positive range.");
+            return;
+        }
+
+        if(start_range > end_range){
+            alert("Start Range should be lesser than end range.");
+            return;
+        }
+
         const filteredExpenses = filterExpenses();
 
         renderAllExpenses(filteredExpenses);
@@ -601,7 +611,7 @@ function filterExpensesByDate(selected_date, expenses){
 
 function filterExpensesByAmountRange(start_range, end_range, expenses){
 
-    if(start_range && end_range && start_range > 0 && end_range > 0){
+    if(start_range && end_range && start_range > 0 && end_range > 0 && start_range < end_range){
         return expenses.filter(exp => exp.amount >= start_range && exp.amount <= end_range);
     }else{
         return expenses;
