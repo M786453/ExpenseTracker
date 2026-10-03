@@ -83,7 +83,7 @@
                             <option value="Shopping">Shopping</option>
                             <option value="Other">Other</option>
                         </select>
-                        <input type="number" placeholder="Enter expense amount..." id="expense-amount-dlg">
+                        <input type="number" min="0.01" step="0.01" placeholder="Enter expense amount..." id="expense-amount-dlg">
                         <textarea placeholder="Enter expense notes..." id="expense-notes-dlg"></textarea>
                         <input type="date" placeholder="Enter expense date..." id="expense-date-dlg">
                         <div class="popup-actions">
@@ -132,7 +132,7 @@
                             <option value="Shopping">Shopping</option>
                             <option value="Other">Other</option>
                         </select>
-                        <input type="number" placeholder="Enter expense amount..." id="update-expense-amount-dlg">
+                        <input type="number" min="0.01" step="0.01" placeholder="Enter expense amount..." id="update-expense-amount-dlg">
                         <input type="date" placeholder="Enter expense date..." id="update-expense-date-dlg">
                         <textarea placeholder="Enter expense notes..." id="update-expense-notes-dlg"></textarea>
                         <div class="popup-actions">
@@ -149,12 +149,12 @@
                         
                         <div class="input-section">
                             <label for="amount-range-start">Range Start</label>
-                            <input type="number" placeholder="Enter Range Start" id="amount-range-start">
+                            <input type="number" min="0.01" step="0.01" placeholder="Enter Range Start" id="amount-range-start">
                         </div>
 
                         <div class="input-section">
                             <label for="amount-range-end">Range End</label>
-                            <input type="number" placeholder="Enter Range End" id="amount-range-end">
+                            <input type="number" min="0.01" step="0.01" placeholder="Enter Range End" id="amount-range-end">
                         </div>
 
                         <div class="actions">
