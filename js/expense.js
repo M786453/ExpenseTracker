@@ -88,7 +88,7 @@ function addExpense(expense){
     expense_amount.innerText = expense.amount.toLocaleString();
 
     const expense_date = document.createElement("td");
-    expense_date.innerText = expense.date_created;
+    expense_date.innerText = expense.expense_date;
 
     const expense_actions = document.createElement("td");
 
@@ -174,6 +174,9 @@ function viewExpense(expense){
     const view_expense_notes = document.getElementById("view-expense-notes");
     view_expense_notes.innerText = expense.notes;
 
+    const view_expense_date = document.getElementById("view-expense-date");
+    view_expense_date.innerText = expense.expense_date;
+
     const view_expense_date_created = document.getElementById("view-expense-date-created");
     view_expense_date_created.innerText = expense.date_created;
 
@@ -205,6 +208,13 @@ function updateExpense(expense){
     const update_expense_amount = document.getElementById("update-expense-amount-dlg");
     update_expense_amount.value = expense.amount;
 
+    const update_expense_date = document.getElementById("update-expense-date-dlg");
+    update_expense_date.value = expense.expense_date;
+
+    update_expense_date.onclick = () => {
+        update_expense_date.showPicker();
+    }
+
     const update_expense_notes = document.getElementById("update-expense-notes-dlg");
     update_expense_notes.value = expense.notes;
 
@@ -217,6 +227,7 @@ function updateExpense(expense){
         const exp_title = update_expense_title.value.trim();
         const exp_category = update_expense_category.value;
         const exp_amount = parseFloat(update_expense_amount.value);
+        const exp_date = update_expense_date.value;
         const exp_notes = update_expense_notes.value;
         const exp_date_modified = formateDate(new Date());
 
@@ -240,6 +251,11 @@ function updateExpense(expense){
             return;
         }
 
+        if(!exp_date){
+            alert("Please select a valid date.");
+            return;
+        }
+
         if(!exp_notes){
             alert("Please enter expense notes.");
             return;
@@ -248,6 +264,7 @@ function updateExpense(expense){
         expense.title = exp_title;
         expense.category = exp_category;
         expense.amount = exp_amount;
+        expense.expense_date = exp_date;
         expense.notes = exp_notes;
         expense.date_modified = exp_date_modified;
 
@@ -282,6 +299,12 @@ function setupAddExpenseDialog(){
 
     const btn_close_expense_dlg = document.getElementById("btn-close-expense-dlg");
 
+    const el_expense_date = document.getElementById("expense-date-dlg");
+    
+    el_expense_date.onclick = () => {
+        el_expense_date.showPicker();
+    };
+
     btnAddExpense.onclick = () => add_expense_popup.showModal();
 
     btn_close_expense_dlg.onclick = () => add_expense_popup.close();
@@ -300,8 +323,9 @@ function setupAddExpenseDialog(){
         const el_expense_notes = document.getElementById("expense-notes-dlg");
         const exp_notes = el_expense_notes.value;
 
-        const el_expense_date = document.getElementById("expense-date-dlg");
         const exp_date = el_expense_date.value;
+
+        console.log("El Expense Date:", el_expense_date);
 
         if(!exp_title){
             alert("Please enter an expense title.");
@@ -339,8 +363,9 @@ function setupAddExpenseDialog(){
             "category": exp_category,
             "amount": exp_amount,
             "notes": exp_notes,
-            "date_created": exp_date,
-            "date_modified": exp_date
+            "expense_date": exp_date,
+            "date_created": formateDate(new Date()),
+            "date_modified": formateDate(new Date())
         }; 
 
         all_expenses.push(expense);
@@ -632,7 +657,7 @@ function filterExpensesByDate(selected_date, expenses){
         return expenses;
     }
 
-    return expenses.filter(exp => exp.date_created === selected_date);
+    return expenses.filter(exp => exp.expense_date === selected_date);
 }
 
 function filterExpensesByAmountRange(start_range, end_range, expenses){
