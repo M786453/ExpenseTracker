@@ -48,7 +48,7 @@ function renderAllExpenses(expenses){
 
     console.log("Total Expenses:", expenses.length);
 
-    renderFooter(total_pages);
+    renderFooter(total_pages, expenses);
 }
 
 function addExpense(expense){
@@ -524,7 +524,7 @@ function filterExpenses(){
     return filtered_expenses;
 }
 
-function renderFooter(total_pages){
+function renderFooter(total_pages, expenses){
 
     console.log("Total Pages:", total_pages);
 
@@ -545,7 +545,7 @@ function renderFooter(total_pages){
 
         btn_page.onclick = () => {
             current_page_no = i;
-            renderAllExpenses(all_expenses);
+            renderAllExpenses(expenses);
         }
 
         el_footer.appendChild(btn_page);
