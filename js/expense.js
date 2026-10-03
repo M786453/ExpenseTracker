@@ -49,6 +49,20 @@ function renderAllExpenses(expenses){
     console.log("Total Expenses:", expenses.length);
 
     renderFooter(total_pages, expenses);
+
+    showHideNoExpensesBanner(expenses.length);
+}
+
+function showHideNoExpensesBanner(total_expenses){
+
+    const el_no_expense_banner = document.querySelector(".no-expenses-banner");
+
+    if(total_expenses > 0){
+        el_no_expense_banner.classList.add("hide-expenses-banner");
+    }else{
+        el_no_expense_banner.classList.remove("hide-expenses-banner");
+    }
+
 }
 
 function addExpense(expense){

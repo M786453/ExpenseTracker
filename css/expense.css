@@ -190,6 +190,17 @@ table{
     gap: 1rem;
 }
 
+/* No Expenses Banner */
+
+.hide-expenses-banner{
+    display: none;
+}
+
+.no-expenses-banner{
+    text-align: center;
+    padding: 5rem;
+}
+
 /* Add Expense Popup */
 
 dialog{
