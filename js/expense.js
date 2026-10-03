@@ -216,6 +216,11 @@ function updateExpense(expense){
             return;
         }
 
+        if(exp_category === "Choose Category"){
+            alert("Please select valid category.");
+            return;
+        }
+
         if(!exp_amount || exp_amount <= 0){
             alert("Please enter valid expense amount.");
             return;
@@ -292,6 +297,11 @@ function setupAddExpenseDialog(){
             return;
         }
 
+        if(exp_category === "Choose Category"){
+            alert("Please select valid category.");
+            return;
+        }
+
         if(!exp_amount || exp_amount <= 0){
             alert("Please enter a vaild amount.");
             return;
@@ -326,7 +336,7 @@ function setupAddExpenseDialog(){
         renderAllExpenses(filterExpenses())
 
         el_expense_title.value = "";
-        el_expense_category.value = "";
+        el_expense_category.value = "Choose Category";
         el_expense_amount.value = "";
         el_expense_notes.value = "";
 
