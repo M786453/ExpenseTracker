@@ -159,6 +159,10 @@ header button{
 
 /* Expenses */
 
+.table-container{
+    height: 20rem;
+}
+
 table{
     width: 100%;
     border-collapse: collapse;
