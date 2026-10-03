@@ -321,9 +321,9 @@ function setupAddExpenseDialog(){
 
         localStorage.setItem("all_expenses", JSON.stringify(all_expenses));
 
-        console.log("All Expenses:", all_expenses);
+        current_page_no = 1;
 
-        addExpense(expense);
+        renderAllExpenses(filterExpenses())
 
         el_expense_title.value = "";
         el_expense_category.value = "";
