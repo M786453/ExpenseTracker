@@ -255,7 +255,9 @@ function updateExpense(expense){
 
         console.log("Updated Expenses:", all_expenses);
 
-        renderAllExpenses(all_expenses);
+        current_page_no = 1;
+
+        renderAllExpenses(filterExpenses());
 
         update_expense_dialog.close();
     }
