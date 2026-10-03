@@ -122,7 +122,7 @@ function addExpense(expense){
         
         deleteExpense(expense);
 
-        table.removeChild(expense_row);
+        renderAllExpenses(filterExpenses());
     };
 
     expense_actions_div.appendChild(expense_view_btn);
