@@ -483,7 +483,7 @@ function setupSearch(){
 
     let timeoutId = null;
 
-    el_search.onkeydown = (e) => {  
+    el_search.oninput = (e) => {  
 
         timeoutId = searchExpenses(timeoutId);
 
