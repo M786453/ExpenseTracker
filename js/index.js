@@ -261,6 +261,29 @@ function renderYearlyOverviewChart(){
 
 }
 
+function renderYearlyCategoryBreakdownChart(){
+
+    const yearlyExpenses = filterYearlyExpenses();
+
+    const categoryMap = {
+        "Food": 0,
+        "Travel": 0,
+        "Bills": 0,
+        "Health": 0,
+        "Shopping": 0,
+        "Other": 0
+    };
+
+    for(const exp of yearlyExpenses){
+
+        categoryMap[exp.category] += exp.amount;
+
+    }
+
+    renderDoughnutChart(categoryMap);
+
+}
+
 function filterYearlyExpenses(){
 
     const curr_date = new Date();
