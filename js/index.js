@@ -179,11 +179,7 @@ function renderWeeklyCategoryBreakdownChart(){
 
     for(const exp of weeklyExpenses){
 
-        if(exp.category in categoryMap){
-            categoryMap[exp.category] += exp.amount;
-        }else{
-            categoryMap[exp.category] = exp.amount;
-        }
+        categoryMap[exp.category] += exp.amount;
 
     }
 
@@ -193,14 +189,53 @@ function renderWeeklyCategoryBreakdownChart(){
 
 function renderMonthlyOverviewChart(){
 
-    const monthlyExpenses = filterMonthlyExpense();
+    const monthlyExpenseMap = {}
 
-    renderOverviewChart(monthlyExpenses);
+    const monthlyExpenses = filterMonthlyExpenses();
+
+    const monthStartEndDates = getMonthStartEndDates();
+
+    const monthStartDate =monthStartEndDates.MonthStartDate;
+
+    const monthEndDate = monthStartEndDates.MonthEndDate;
+
+    for(let i=monthStartDate.getDate(); i <= monthEndDate.getDate(); i++){
+        const curr_date = new Date(monthStartDate.getFullYear(), monthStartDate.getMonth(), i);
+
+        monthlyExpenseMap[curr_date.getDate()] = 0;
+    }
+
+    for(const exp of monthlyExpenses){
+        const exp_date = new Date(exp.expense_date);
+        monthlyExpenseMap[exp_date.getDate()] = exp.amount;
+    }
+
+    renderOverviewChart(monthlyExpenseMap);
 }
 
-function filterMonthlyExpense(){
+function renderMonthlyCategoryBreakdownChart(){
 
-    const monthlyExpenseMap = {}
+    const monthlyExpenses = filterMonthlyExpenses();
+
+    const categoryMap = {
+        "Food": 0,
+        "Travel": 0,
+        "Bills": 0,
+        "Health": 0,
+        "Shopping": 0,
+        "Other": 0
+    };
+
+    for(const exp of monthlyExpenses){
+
+        categoryMap[exp.category] += exp.amount;
+
+    }
+
+    renderDoughnutChart(categoryMap);
+}
+
+function filterMonthlyExpenses(){
 
     const monthStartEndDates = getMonthStartEndDates();
 
@@ -216,18 +251,7 @@ function filterMonthlyExpense(){
         return exp_date >= monthStartDate && exp_date <= monthEndDate;
     });
 
-    for(let i=monthStartDate.getDate(); i <= monthEndDate.getDate(); i++){
-        const curr_date = new Date(monthStartDate.getFullYear(), monthStartDate.getMonth(), i);
-
-        monthlyExpenseMap[curr_date.getDate()] = 0;
-    }
-
-    for(const exp of monthlyExpenses){
-        const exp_date = new Date(exp.expense_date);
-        monthlyExpenseMap[exp_date.getDate()] = exp.amount;
-    }
-
-    return monthlyExpenseMap;
+    return monthlyExpenses;
 }
 
 function filterWeeklyExpenses(){
