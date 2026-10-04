@@ -140,6 +140,14 @@ function renderRecentExpenses(){
         }
     }
 
+    if(expenses.length > 0){
+        const see_more_btn = document.querySelector(".see-more");
+
+        console.log("See More Button:", see_more_btn);
+
+        see_more_btn.classList.add("active");
+    }
+
     
 }
 
