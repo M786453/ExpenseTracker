@@ -11,7 +11,7 @@ const el_today_expenses = document.getElementById("today-expenses");
 const el_week_expenses = document.getElementById("week-expenses");
 const el_expense_count = document.getElementById("expense-count");
 
-setTotalExpneses();
+setTotalExpenses();
 setTodayExpenses();
 setExpenseCount();
 setWeekExpenses();
@@ -48,7 +48,7 @@ function setExpenseCount(){
     }
 }
 
-function setTotalExpneses(){
+function setTotalExpenses(){
 
     try{
         const total_expenses = expenses.reduce((sum, exp) => {return sum+exp.amount} ,0)
