@@ -20,6 +20,8 @@ renderWeeklyExpenseOverviewChart();
 
 renderWeeklyCategoryBreakdownChart();
 
+setupWeeklyCharts();
+
 renderRecentExpenses();
 
 function setWeekExpenses(){
@@ -132,6 +134,34 @@ function renderRecentExpenses(){
     }
 
     
+}
+
+function setupWeeklyCharts(){
+
+    const weeklyChartsBtn = document.getElementById("weeklyCharts");
+
+    weeklyChartsBtn.onclick = () => {
+
+        clearPeriodButtonsStates();
+
+        weeklyChartsBtn.classList.add("active");
+
+        renderWeeklyExpenseOverviewChart();
+
+        renderWeeklyCategoryBreakdownChart();
+
+    }
+
+}
+
+function clearPeriodButtonsStates(){
+
+    const periodButtons = document.querySelectorAll(".expenses-period button")
+
+    for(const btn of periodButtons){
+        btn.classList.remove("active");
+    }
+
 }
 
 function renderWeeklyExpenseOverviewChart(){
