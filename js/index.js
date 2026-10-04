@@ -235,6 +235,47 @@ function renderMonthlyCategoryBreakdownChart(){
     renderDoughnutChart(categoryMap);
 }
 
+function renderYearlyOverviewChart(){
+
+    const yearlyExpensesMap = {};
+
+    const yearlyExpenses = filterYearlyExpenses();
+
+    for(let i=1; i<=12; i++){
+        yearlyExpensesMap[i] = 0;
+    }
+
+    for(const exp of yearlyExpenses){
+
+        const exp_date = new Date(exp.expense_date);
+
+        console.log("Month:", exp_date.getMonth());
+
+        yearlyExpensesMap[exp_date.getMonth()+1] += exp.amount;
+
+    }
+
+    console.log("Yearly Expenses Map:", yearlyExpensesMap);
+
+    renderOverviewChart(yearlyExpensesMap);
+
+}
+
+function filterYearlyExpenses(){
+
+    const curr_date = new Date();
+
+    const yearlyExpenses = expenses.filter( (exp) => {
+
+        const exp_date = new Date(exp.expense_date);
+
+        return exp_date.getFullYear() === curr_date.getFullYear();
+        
+    });
+
+    return yearlyExpenses;
+}
+
 function filterMonthlyExpenses(){
 
     const monthStartEndDates = getMonthStartEndDates();
