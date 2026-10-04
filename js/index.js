@@ -16,9 +16,9 @@ setTodayExpenses();
 setExpenseCount();
 setWeekExpenses();
 
-renderExpenseOverviewChart();
+renderWeeklyExpenseOverviewChart();
 
-renderCategoryBreakdownChart();
+renderWeeklyCategoryBreakdownChart();
 
 renderRecentExpenses();
 
@@ -134,7 +134,7 @@ function renderRecentExpenses(){
     
 }
 
-function renderExpenseOverviewChart(){
+function renderWeeklyExpenseOverviewChart(){
 
     const weeklyExpenses = filterWeeklyExpenses();
 
@@ -160,33 +160,11 @@ function renderExpenseOverviewChart(){
         }
     }
 
-    const ctx = document.getElementById("expenseOverviewChart");
-
-    new Chart(ctx, {
-        type: "bar",
-        data: {
-            labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-            datasets: [{
-                label: "Expenses (PKR)",
-                data: Object.values(weeklyExpensesMap),
-                backgroudColor: "#6366f1",
-                borderRadius: 6
-            }],
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        }
-    })
+    renderOverviewChart(weeklyExpensesMap);
 
 }
 
-function renderCategoryBreakdownChart(){
+function renderWeeklyCategoryBreakdownChart(){
 
     const weeklyExpenses = filterWeeklyExpenses();
 
@@ -209,37 +187,7 @@ function renderCategoryBreakdownChart(){
 
     }
 
-    const ctx = document.getElementById("categoryBreakdownChart");
-
-    new Chart(ctx, {
-        type: "doughnut",
-        data: {
-            labels: Object.keys(categoryMap),
-            datasets: [
-                {
-                    data: Object.values(categoryMap),
-                    backgroundColor: [
-                        "#6366f1",
-                        "#14b8a6",
-                        "#f59e0b",
-                        "#ec4899",
-                        "#8b5cf6",
-                        "#06b6d4"
-                    ],
-                    borderWidth: 2,
-                    borderColor: "#ffffff",
-                    hoverOffset: 6
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            cutout: "65%"
-        }
-    })
-
-
+    renderDoughnutChart(categoryMap);
 
 }
 
@@ -259,6 +207,68 @@ function filterWeeklyExpenses(){
     });
 
     return weeklyExpenses;
+}
+
+function renderOverviewChart(chart_expenses){
+
+    const ctx = document.getElementById("expenseOverviewChart");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: Object.keys(chart_expenses),
+            datasets: [{
+                label: "Expenses (PKR)",
+                data: Object.values(chart_expenses),
+                backgroudColor: "#6366f1",
+                borderRadius: 6
+            }],
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        }
+    });
+
+}
+
+function renderDoughnutChart(categories_data){
+
+    const ctx = document.getElementById("categoryBreakdownChart");
+
+    new Chart(ctx, {
+        type: "doughnut",
+        data: {
+            labels: Object.keys(categories_data),
+            datasets: [
+                {
+                    data: Object.values(categories_data),
+                    backgroundColor: [
+                        "#6366f1",
+                        "#14b8a6",
+                        "#f59e0b",
+                        "#ec4899",
+                        "#8b5cf6",
+                        "#06b6d4"
+                    ],
+                    borderWidth: 2,
+                    borderColor: "#ffffff",
+                    hoverOffset: 6
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: "65%"
+        }
+    });
+
 }
 
 function getWeekStartEndDates(){
