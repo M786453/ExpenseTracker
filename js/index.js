@@ -191,6 +191,45 @@ function renderWeeklyCategoryBreakdownChart(){
 
 }
 
+function renderMonthlyOverviewChart(){
+
+    const monthlyExpenses = filterMonthlyExpense();
+
+    renderOverviewChart(monthlyExpenses);
+}
+
+function filterMonthlyExpense(){
+
+    const monthlyExpenseMap = {}
+
+    const monthStartEndDates = getMonthStartEndDates();
+
+    const monthStartDate =monthStartEndDates.MonthStartDate;
+
+    const monthEndDate = monthStartEndDates.MonthEndDate;
+
+    const monthlyExpenses = expenses.filter( (exp) => {
+
+        const exp_date = new Date(exp.expense_date);
+        exp_date.setHours(0,0,0,0);
+
+        return exp_date >= monthStartDate && exp_date <= monthEndDate;
+    });
+
+    for(let i=monthStartDate.getDate(); i <= monthEndDate.getDate(); i++){
+        const curr_date = new Date(monthStartDate.getFullYear(), monthStartDate.getMonth(), i);
+
+        monthlyExpenseMap[curr_date.getDate()] = 0;
+    }
+
+    for(const exp of monthlyExpenses){
+        const exp_date = new Date(exp.expense_date);
+        monthlyExpenseMap[exp_date.getDate()] = exp.amount;
+    }
+
+    return monthlyExpenseMap;
+}
+
 function filterWeeklyExpenses(){
 
     const weekStartEndDates = getWeekStartEndDates();
@@ -268,6 +307,27 @@ function renderDoughnutChart(categories_data){
             cutout: "65%"
         }
     });
+
+}
+
+function getMonthStartEndDates(){
+
+    const curr_date = new Date();
+
+    const monthStartDate = new Date(curr_date.getFullYear(), curr_date.getMonth(), 1);
+    monthStartDate.setHours(0,0,0,0);
+
+    console.log("Month Start Date:", monthStartDate);
+
+    const monthEndDate = new Date(curr_date.getFullYear(), curr_date.getMonth()+1, 0);
+    monthEndDate.setHours(0,0,0,0);
+
+    console.log("Month End Date:", monthEndDate);
+
+    return {
+        "MonthStartDate": monthStartDate,
+        "MonthEndDate": monthEndDate
+    }
 
 }
 
