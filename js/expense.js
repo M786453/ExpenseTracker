@@ -122,6 +122,8 @@ function addExpense(expense){
         
         deleteExpense(expense);
 
+        current_page_no = 1;
+
         renderAllExpenses(filterExpenses());
     };
 
@@ -429,6 +431,8 @@ function setupAmountRangeDailog(){
 
         const filteredExpenses = filterExpenses();
 
+        current_page_no = 1;
+
         renderAllExpenses(filteredExpenses);
 
         el_amount_range.innerText = `PKR. (${start_range} - ${end_range})`
@@ -450,6 +454,8 @@ function setupAmountRangeDailog(){
         el_amount_range.innerText = "Amount Range";
 
         const filteredExpenses = filterExpenses();
+
+        current_page_no = 1;
 
         renderAllExpenses(filteredExpenses);
 
@@ -489,6 +495,8 @@ function searchExpenses(timeoutId){
 
         const filteredExpenses = filterExpenses();
 
+        current_page_no = 1;
+
         renderAllExpenses(filteredExpenses);
 
     }, 500);
@@ -501,6 +509,8 @@ function setupCategoryFilter(){
     el_category.onchange = (e) => {
 
         const filteredExpenses = filterExpenses();
+
+        current_page_no = 1;
 
         renderAllExpenses(filteredExpenses);
 
@@ -519,6 +529,8 @@ function setupDateFilter(){
     dateFilter.onchange = () => {
 
         const filteredExpenses = filterExpenses();
+
+        current_page_no = 1;
 
         renderAllExpenses(filteredExpenses);
 
