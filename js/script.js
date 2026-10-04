@@ -16,44 +16,19 @@ setTodayExpenses();
 setExpenseCount();
 setWeekExpenses();
 
+renderExpenseOverviewChart();
+
 renderRecentExpenses();
 
 function setWeekExpenses(){
 
     try{
 
-        const curr_date = new Date();
-        curr_date.setHours(0,0,0,0);
+        const weekExpenses = filterWeeklyExpenses();
 
-        const day = curr_date.getDay();
+        const total_week_expenses = weekExpenses.reduce((sum, exp) => sum+exp.amount,0);
 
-        const diff = curr_date.getDate() - day + (day === 0 ? -6 : 1);
-
-        const startWeekDate = new Date();
-        startWeekDate.setDate(diff);
-
-        console.log("Start Date:", startWeekDate);
-
-        const endWeekDate = new Date();
-        endWeekDate.setDate(diff+6);
-
-        console.log("End Week Date:", endWeekDate);
-
-        const weekExpenses = expenses.reduce((sum, exp) => {
-
-            const exp_date = new Date(exp.date_created);
-            exp_date.setHours(0,0,0,0);
-
-            console.log("Expense Date:", exp_date);
-
-            if(exp_date >= startWeekDate && exp_date <= endWeekDate){
-                sum += exp.amount
-            }
-
-            return sum;
-        },0);
-
-        el_week_expenses.innerText = `PKR ${weekExpenses.toLocaleString()}`;
+        el_week_expenses.innerText = `PKR ${total_week_expenses.toLocaleString()}`;
 
     }catch(e){
         console.log("Error in setting week expenses:", e);
@@ -155,4 +130,96 @@ function renderRecentExpenses(){
     }
 
     
+}
+
+function renderExpenseOverviewChart(){
+
+    const weeklyExpenses = filterWeeklyExpenses();
+
+    const weeklyExpensesMap = {};
+
+    const weekDates = getWeekStartEndDates();
+
+    for(let i=0; i<7; i++){
+
+        const weekDay = new Date(weekDates.weekStartDate);
+
+        weekDay.setDate(weekDay.getDate() + i);
+
+        weeklyExpensesMap[formateDate(weekDay)] = 0;
+    }
+
+    for(const exp of weeklyExpenses){
+        
+        if(exp.expense_date in weeklyExpensesMap){
+            weeklyExpensesMap[exp.expense_date] += exp.amount;
+        }else{
+            weeklyExpensesMap[exp.expense_date] = exp.amount;
+        }
+    }
+
+    const ctx = document.getElementById("expenseOverviewChart");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+            datasets: [{
+                label: "Expenses (PKR)",
+                data: Object.values(weeklyExpensesMap),
+                backgroudColor: "#6366f1",
+                borderRadius: 6
+            }],
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        }
+    })
+
+}
+
+function filterWeeklyExpenses(){
+
+    const weekStartEndDates = getWeekStartEndDates();
+
+    const weekStartDate = weekStartEndDates.weekStartDate;
+    const weekEndDate = weekStartEndDates.weekEndDate;
+
+    const weeklyExpenses = expenses.filter((exp) => {
+
+        const exp_date = new Date(exp.expense_date);
+        exp_date.setHours(0,0,0,0);
+
+        return exp_date >= weekStartDate && exp_date <= weekEndDate;
+    });
+
+    return weeklyExpenses;
+}
+
+function getWeekStartEndDates(){
+    const curr_date = new Date();
+    curr_date.setHours(0,0,0, 0);
+
+    const day = curr_date.getDay();
+
+    const diff = curr_date.getDate() - day + (day === 0 ? -6 : 1);
+
+    const weekStartDate = new Date();
+    weekStartDate.setDate(diff);
+    weekStartDate.setHours(0,0,0,0);
+
+    const weekEndDate = new Date();
+    weekEndDate.setDate(diff+6);
+    weekEndDate.setHours(0,0,0,0);
+
+    return {
+        "weekStartDate": weekStartDate,
+        "weekEndDate": weekEndDate
+    }
 }

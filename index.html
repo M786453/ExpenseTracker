@@ -58,15 +58,14 @@
                     <h3>Expense Over Time</h3>
 
                     <div class="expenses-period">
-                        <button class="active">Daily</button>
-                        <button>Weekly</button>
+                        <button class="active">Weekly</button>
                         <button>Monthly</button>
                         <button>Yearly</button>
                         <button>Custom</button>
                     </div>
 
                     <div class="expenses-period-chart">
-                        <p>Expenses Over Time Chart Here...</p>
+                        <canvas id="expenseOverviewChart"></canvas>
                     </div>
 
                 </article>
@@ -118,8 +117,7 @@
             </section>
 
         </main>
-
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="js/script.js"></script>
-
     </body>
 </html>

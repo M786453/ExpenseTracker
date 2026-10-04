@@ -155,7 +155,7 @@ article{
 .expenses-period-chart{
     border: 1px solid var(--color-sidebar);
 
-    height: 15rem;
+    margin-top: 2rem;
 }
 
 /** Other Charts **/
