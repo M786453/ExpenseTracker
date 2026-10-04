@@ -25,6 +25,8 @@ renderWeeklyCategoryBreakdownChart();
 
 setupWeeklyCharts();
 
+setupMonthlyCharts();
+
 renderRecentExpenses();
 
 function setWeekExpenses(){
@@ -152,6 +154,24 @@ function setupWeeklyCharts(){
         renderWeeklyExpenseOverviewChart();
 
         renderWeeklyCategoryBreakdownChart();
+
+    }
+
+}
+
+function setupMonthlyCharts(){
+
+    const monthlyChartsBtn = document.getElementById("monthlyCharts");
+
+    monthlyChartsBtn.onclick = () => {
+
+        clearPeriodButtonsStates();
+
+        monthlyChartsBtn.classList.add("active");
+
+        renderMonthlyOverviewChart();
+
+        renderMonthlyCategoryBreakdownChart();
 
     }
 
