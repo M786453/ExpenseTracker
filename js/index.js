@@ -11,6 +11,9 @@ const el_today_expenses = document.getElementById("today-expenses");
 const el_week_expenses = document.getElementById("week-expenses");
 const el_expense_count = document.getElementById("expense-count");
 
+let expenseOverviewChart = null;
+let expenseCategoryChart = null;
+
 setTotalExpenses();
 setTodayExpenses();
 setExpenseCount();
@@ -370,7 +373,10 @@ function renderOverviewChart(chart_expenses){
 
     const ctx = document.getElementById("expenseOverviewChart");
 
-    new Chart(ctx, {
+    if(expenseOverviewChart)
+        expenseOverviewChart.destroy();
+
+    expenseOverviewChart = new Chart(ctx, {
         type: "bar",
         data: {
             labels: Object.keys(chart_expenses),
@@ -398,7 +404,10 @@ function renderDoughnutChart(categories_data){
 
     const ctx = document.getElementById("categoryBreakdownChart");
 
-    new Chart(ctx, {
+    if(expenseCategoryChart)
+        expenseCategoryChart.destroy();
+
+    expenseCategoryChart = new Chart(ctx, {
         type: "doughnut",
         data: {
             labels: Object.keys(categories_data),
