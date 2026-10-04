@@ -18,6 +18,8 @@ setWeekExpenses();
 
 renderExpenseOverviewChart();
 
+renderCategoryBreakdownChart();
+
 renderRecentExpenses();
 
 function setWeekExpenses(){
@@ -181,6 +183,63 @@ function renderExpenseOverviewChart(){
             }
         }
     })
+
+}
+
+function renderCategoryBreakdownChart(){
+
+    const weeklyExpenses = filterWeeklyExpenses();
+
+    const categoryMap = {
+        "Food": 0,
+        "Travel": 0,
+        "Bills": 0,
+        "Health": 0,
+        "Shopping": 0,
+        "Other": 0
+    };
+
+    for(const exp of weeklyExpenses){
+
+        if(exp.category in categoryMap){
+            categoryMap[exp.category] += exp.amount;
+        }else{
+            categoryMap[exp.category] = exp.amount;
+        }
+
+    }
+
+    const ctx = document.getElementById("categoryBreakdownChart");
+
+    new Chart(ctx, {
+        type: "doughnut",
+        data: {
+            labels: Object.keys(categoryMap),
+            datasets: [
+                {
+                    data: Object.values(categoryMap),
+                    backgroundColor: [
+                        "#6366f1",
+                        "#14b8a6",
+                        "#f59e0b",
+                        "#ec4899",
+                        "#8b5cf6",
+                        "#06b6d4"
+                    ],
+                    borderWidth: 2,
+                    borderColor: "#ffffff",
+                    hoverOffset: 6
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: "65%"
+        }
+    })
+
+
 
 }
 
