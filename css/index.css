@@ -183,6 +183,14 @@ article{
     border-bottom: 1px solid var(--color-border);
 }
 
+.no-recent-expenses.active{
+    display: block;
+}
+
+.no-recent-expenses{
+    display: none;
+}
+
 .see-more.active{
     display: block;
 }

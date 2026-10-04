@@ -143,9 +143,14 @@ function renderRecentExpenses(){
     if(expenses.length > 0){
         const see_more_btn = document.querySelector(".see-more");
 
-        console.log("See More Button:", see_more_btn);
-
         see_more_btn.classList.add("active");
+    }
+
+    if(expenses.length === 0){
+
+        const no_recent_exp_txt = document.querySelector(".no-recent-expenses");
+
+        no_recent_exp_txt.classList.add("active");
     }
 
     
@@ -241,7 +246,7 @@ function renderWeeklyExpenseOverviewChart(){
         }
     }
 
-    renderOverviewChart(weeklyExpensesMap);
+    renderOverviewChart(weeklyExpenses, weeklyExpensesMap);
 
 }
 
@@ -264,7 +269,7 @@ function renderWeeklyCategoryBreakdownChart(){
 
     }
 
-    renderDoughnutChart(categoryMap);
+    renderDoughnutChart(weeklyExpenses, categoryMap);
 
 }
 
@@ -291,7 +296,7 @@ function renderMonthlyOverviewChart(){
         monthlyExpenseMap[exp_date.getDate()] = exp.amount;
     }
 
-    renderOverviewChart(monthlyExpenseMap);
+    renderOverviewChart(monthlyExpenses, monthlyExpenseMap);
 }
 
 function renderMonthlyCategoryBreakdownChart(){
@@ -313,7 +318,7 @@ function renderMonthlyCategoryBreakdownChart(){
 
     }
 
-    renderDoughnutChart(categoryMap);
+    renderDoughnutChart(monthlyExpenses, categoryMap);
 }
 
 function renderYearlyOverviewChart(){
@@ -338,7 +343,7 @@ function renderYearlyOverviewChart(){
 
     console.log("Yearly Expenses Map:", yearlyExpensesMap);
 
-    renderOverviewChart(yearlyExpensesMap);
+    renderOverviewChart(yearlyExpenses, yearlyExpensesMap);
 
 }
 
@@ -361,7 +366,7 @@ function renderYearlyCategoryBreakdownChart(){
 
     }
 
-    renderDoughnutChart(categoryMap);
+    renderDoughnutChart(yearlyExpenses, categoryMap);
 
 }
 
@@ -417,9 +422,21 @@ function filterWeeklyExpenses(){
     return weeklyExpenses;
 }
 
-function renderOverviewChart(chart_expenses){
+function renderOverviewChart(filtered_expenses, chart_expenses){
 
     const ctx = document.getElementById("expenseOverviewChart");
+
+    if(filtered_expenses.length > 0){
+        ctx.style.display = "block";
+
+        for(const no_exp_txt of document.querySelectorAll(".no-expenses"))
+            no_exp_txt.style.display = "none";
+    }else{
+        ctx.style.display = "none";
+
+        for(const no_exp_txt of document.querySelectorAll(".no-expenses"))
+            no_exp_txt.style.display = "block";
+    }
 
     if(expenseOverviewChart)
         expenseOverviewChart.destroy();
@@ -448,9 +465,21 @@ function renderOverviewChart(chart_expenses){
 
 }
 
-function renderDoughnutChart(categories_data){
+function renderDoughnutChart(filtered_expenses, categories_data){
 
     const ctx = document.getElementById("categoryBreakdownChart");
+
+    if(filtered_expenses.length > 0){
+        ctx.style.display = "block";
+        
+        for(const no_exp_txt of document.querySelectorAll(".no-expenses"))
+            no_exp_txt.style.display = "none";
+    }else{
+        ctx.style.display = "none";
+        
+        for(const no_exp_txt of document.querySelectorAll(".no-expenses"))
+            no_exp_txt.style.display = "block";
+    }
 
     if(expenseCategoryChart)
         expenseCategoryChart.destroy();
