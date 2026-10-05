@@ -76,7 +76,7 @@ function setTodayExpenses(){
 
         const formatted_curr_date = formateDate(curr_date);
 
-        const curr_expenses = expenses.filter((exp) => exp.date_created === formatted_curr_date).
+        const curr_expenses = expenses.filter((exp) => exp.expense_date === formatted_curr_date).
                                 reduce((sum, exp) => {return sum+exp.amount}, 0);
 
         el_today_expenses.innerText = `PKR ${curr_expenses.toLocaleString()}`;
