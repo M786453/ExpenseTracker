@@ -126,7 +126,7 @@ function renderRecentExpenses(){
             amount.innerText = `PKR ${exp.amount.toLocaleString()}`;
 
             const date = document.createElement("td");
-            date.innerText = exp.date_created;
+            date.innerText = exp.expense_date;
 
             expense_row.appendChild(title);
             expense_row.appendChild(category);
