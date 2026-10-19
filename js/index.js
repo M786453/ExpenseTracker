@@ -230,23 +230,29 @@ function renderWeeklyExpenseOverviewChart(){
 
     const weekDates = getWeekStartEndDates();
 
+    const weekDaysMap = {}
+
     for(let i=0; i<7; i++){
 
         const weekDay = new Date(weekDates.weekStartDate);
 
         weekDay.setDate(weekDay.getDate() + i);
 
-        weeklyExpensesMap[formateDate(weekDay)] = 0;
+        weeklyExpensesMap[WEEK_DAYS[i]] = 0;
+
+        weekDaysMap[formateDate(weekDay)] = WEEK_DAYS[i];
     }
 
     for(const exp of weeklyExpenses){
         
         if(exp.expense_date in weeklyExpensesMap){
-            weeklyExpensesMap[exp.expense_date] += exp.amount;
+            weeklyExpensesMap[weekDaysMap[exp.expense_date]] += exp.amount;
         }else{
-            weeklyExpensesMap[exp.expense_date] = exp.amount;
+            weeklyExpensesMap[weekDaysMap[exp.expense_date]] = exp.amount;
         }
     }
+
+
 
     renderOverviewChart(weeklyExpenses, weeklyExpensesMap);
 
