@@ -1,4 +1,6 @@
 let expenses = [];
+let MONTHS = ["Jan", "Fab", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+let WEEK_DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 if(localStorage.getItem("all_expenses")){
     expenses = JSON.parse(localStorage.getItem("all_expenses"));
@@ -327,8 +329,8 @@ function renderYearlyOverviewChart(){
 
     const yearlyExpenses = filterYearlyExpenses();
 
-    for(let i=1; i<=12; i++){
-        yearlyExpensesMap[i] = 0;
+    for(let i=0; i<12; i++){
+        yearlyExpensesMap[MONTHS[i]] = 0;
     }
 
     for(const exp of yearlyExpenses){
@@ -337,7 +339,7 @@ function renderYearlyOverviewChart(){
 
         console.log("Month:", exp_date.getMonth());
 
-        yearlyExpensesMap[exp_date.getMonth()+1] += exp.amount;
+        yearlyExpensesMap[MONTHS[exp_date.getMonth()]] += exp.amount;
 
     }
 
